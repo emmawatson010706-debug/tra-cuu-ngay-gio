@@ -471,16 +471,29 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
    TRANG CHỦ — "bàn thờ sơn mài": nền xanh sơn mài, hoa văn mây vàng, thẻ bài vị
    ===================================================================== */
 /* =====================================================================
-   TRANG CHỦ — NỀN VÀNG ĐỒNG HOÀNG GIA (Bronze Gold) Sang Trọng & Cân Đối Tuyệt Đối
+   TRANG CHỦ — NỀN ĐỎ SƠN MÀI SON THẮM (Đồng bộ màu với trang Tra Cứu)
    ===================================================================== */
 .home-hero {
   position: relative;
-  border-radius: 24px;
-  color: var(--ink);
-  padding: 18px 16px;
-  background: linear-gradient(160deg, #fdf6e7 0%, #f7e6be 40%, #ebd08d 80%, #dfbe6c 100%);
-  box-shadow: 0 1px 0 rgba(255,255,255,.9) inset, 0 4px 14px rgba(180, 130, 30, 0.22), 0 20px 38px -14px rgba(130, 90, 20, 0.32);
-  border: 2px solid #c59738;
+  overflow: hidden;
+  border-radius: 22px;
+  color: #fff;
+  padding: 18px 16px 16px;
+  background: radial-gradient(120% 90% at 100% 0%, rgba(255,255,255,.18), rgba(255,255,255,0) 55%), linear-gradient(150deg, #c81e2b 0%, #9a0f19 55%, #6e0911 100%);
+  box-shadow: 0 1px 0 rgba(255,255,255,.25) inset, 0 18px 34px -14px rgba(138,13,22,.75);
+  border: 1px solid rgba(233,207,138,.65);
+}
+.home-hero::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border-radius: 17px;
+  border: 1px solid rgba(233,207,138,.35);
+  pointer-events: none;
+}
+.home-hero > * {
+  position: relative;
+  z-index: 1;
 }
 
 /* Cụm đầu: Đồng hồ vuông chạy theo giờ VN + Ngày tháng: Dịch chuyển CÂN ĐỐI Ở GIỮA 2 BÊN */
@@ -489,7 +502,7 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
   justify-content: center;
   align-items: center;
   padding-bottom: 14px;
-  border-bottom: 1.5px dashed rgba(180, 130, 30, 0.4);
+  border-bottom: 1px dashed rgba(233, 207, 138, 0.4);
 }
 .hh-center-group {
   display: flex;
@@ -511,7 +524,7 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
   gap: 4px;
 }
 .vn-clock-svg {
-  filter: drop-shadow(0 4px 10px rgba(160, 115, 30, 0.35));
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.35));
 }
 .clock-face {
   fill: #ffffff;
@@ -552,14 +565,14 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
   font-weight: 800;
   letter-spacing: .5px;
   color: #713f12;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.95);
   border: 1px solid #d4af37;
   padding: 1px 6px;
   border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
-/* Khối chữ ngày tháng bên cạnh đồng hồ: Cân đối, màu sắc nét */
+/* Khối chữ ngày tháng bên cạnh đồng hồ: Màu vàng và trắng sáng nổi trên nền đỏ */
 .hh-daytx {
   min-width: 0;
   text-align: left;
@@ -569,24 +582,26 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
   font-weight: 800;
   letter-spacing: .6px;
   text-transform: uppercase;
-  color: #b91c1c;
+  color: #f3dc9e;
 }
 .hh-lunar {
-  font-size: 17px;
+  font-size: 17.5px;
   font-weight: 800;
-  color: #0e2a55;
+  color: #ffffff;
   line-height: 1.3;
+  text-shadow: 0 1px 2px rgba(0,0,0,.4);
 }
 .hh-year {
   font-size: 13.5px;
   font-weight: 600;
-  color: #451a03;
+  color: #ffe6ae;
   line-height: 1.3;
 }
 .hh-sol {
   font-size: 13px;
-  color: #52525b;
+  color: #fce7e8;
   line-height: 1.3;
+  opacity: .95;
 }
 
 /* KHỐI TIÊU ĐỀ: HÀNG 1 THÁNG 9 NÀY - HÀNG 2 GIA ĐẠO AN YÊN (CÂN ĐỐI Ở GIỮA 2 BÊN) */
@@ -598,39 +613,41 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
   font-size: 16px;
   font-weight: 800;
   letter-spacing: .8px;
-  color: #0e2a55;
+  color: #fde047;
   text-transform: uppercase;
   line-height: 1.3;
+  text-shadow: 0 1px 3px rgba(0,0,0,.6);
 }
 .hh-st-desc {
   font-size: 13.5px;
   font-weight: 700;
-  color: #78350f;
+  color: #fff8e7;
   letter-spacing: .4px;
   margin-top: 3px;
   line-height: 1.3;
 }
 .hh-status-headline-center.has-gio .hh-st-month {
-  color: #b91c1c;
+  color: #fef08a;
 }
 .hh-status-headline-center.has-gio .hh-st-desc {
-  color: #991b1b;
+  color: #ffd1d5;
 }
 
-/* KHUNG NHỎ BÊN TRONG: TẤT CẢ NỘI DUNG CĂN GIỮA CHÍNH GIỮA CÂN ĐỐI 2 BÊN */
+/* KHUNG NHỎ BÊN TRONG: NỀN TRẮNG SỨ VIỀN VÀNG TRANG NHÃ, CĂN GIỮA CHÍNH GIỮA CÂN ĐỐI 2 BÊN */
 .hh-target-item {
   margin: 0 auto;
   max-width: 460px;
   padding: 12px 14px;
   border-radius: 16px;
   background: #ffffff;
-  border: 1.8px solid #cba34a;
-  box-shadow: 0 1px 0 #fff inset, 0 4px 12px rgba(160, 115, 30, 0.16);
+  border: 1.5px solid #d4af37;
+  box-shadow: 0 1px 0 #fff inset, 0 6px 16px rgba(0, 0, 0, 0.25);
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: var(--ink);
 }
 .hh-target-sublabel {
   font-size: 11px;
@@ -687,7 +704,7 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
   color: #713f12;
   background: linear-gradient(180deg, #fef3c7, #fde68a);
   border: 1.2px solid #d97706;
-  padding: 3px 12px;
+  padding: 3px 14px;
   border-radius: 999px;
   box-shadow: 0 1px 3px rgba(180, 115, 20, 0.2);
 }
@@ -709,11 +726,12 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
   letter-spacing: .5px;
   color: #fff;
   background: linear-gradient(180deg, #dc2626, #991b1b);
-  box-shadow: 0 2px 8px rgba(185, 28, 28, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.35);
 }
 .hh-target-item.is-urgent-item {
   border-color: #ef4444;
-  background: #fffdfd;
+  background: #ffffff;
 }
 .hh-urgent-btns {
   display: flex;
