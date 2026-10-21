@@ -1,0 +1,18 @@
+# Tạo một tệp HTML duy nhất để xem trước giao diện (mở trực tiếp trên máy, không cần máy chủ)
+import base64, re, os, sys
+R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+out = sys.argv[1] if len(sys.argv) > 1 else os.path.join(R, 'xem-truoc.html')
+def b64(path, mime): return 'data:%s;base64,%s' % (mime, base64.b64encode(open(os.path.join(R, path.lstrip('/')), 'rb').read()).decode())
+html = open(os.path.join(R, 'index.html'), encoding='utf-8').read()
+css = open(os.path.join(R, 'styles.css'), encoding='utf-8').read()
+css = re.sub(r'url\((/fonts/[^)]+)\)', lambda m: 'url(%s)' % b64(m.group(1), 'font/woff2'), css)
+html = re.sub(r'\s*<link rel="(manifest|preload|apple-touch-icon)"[^>]*>', '', html)
+html = html.replace('<link rel="stylesheet" href="/styles.css">', '<style>\n' + css + '\n</style>')
+html = html.replace('href="/icons/favicon-64.png"', 'href="%s"' % b64('/icons/favicon-64.png', 'image/png'))
+html = html.replace('src="/icons/icon-192.png"', 'src="%s"' % b64('/icons/icon-192.png', 'image/png'))
+for js in ['gio-core.js', 'bai-cung.js', 'app.js']:
+    code = open(os.path.join(R, js), encoding='utf-8').read().replace('</script', '<\\/script')
+    html = html.replace('<script src="/%s"></script>' % js, '<script>\n' + code + '\n</script>')
+html = html.replace('<title>Tra cứu ngày giỗ</title>', '<title>Tra cứu ngày giỗ — Bản xem trước</title>')
+open(out, 'w', encoding='utf-8').write(html)
+print(out, len(html) // 1024, 'KB')

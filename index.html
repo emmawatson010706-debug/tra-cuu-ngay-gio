@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Tra cứu ngày giỗ</title>
+  <meta name="description" content="Lưu ngày giỗ theo âm lịch, tự tính ngày dương lịch và nhắc trước 5 ngày.">
+  <meta name="theme-color" content="#0e2a55">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Ngày Giỗ">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" type="image/png" href="/icons/favicon-64.png">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <link rel="preload" href="/fonts/be-vietnam-pro-vietnamese-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/be-vietnam-pro-vietnamese-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16.5" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/><path d="M8 14h3M13 14h3M8 17.5h3"/></symbol>
+    <symbol id="i-set" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h2"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="m13.5 6.5 4 4"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6.5 7l1 13h9l1-13"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15L6 16z"/><path d="M10 20.5a2.2 2.2 0 0 0 4 0"/></symbol>
+    <symbol id="i-save" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 17v3h16v-3"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M7 8l5-5 5 5"/><path d="M4 17v3h16v-3"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></symbol>
+    <symbol id="i-incense" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 13V7M12 13V5M15 13V7"/><path d="M5 13h14l-1.5 5.5a2 2 0 0 1-2 1.5h-7a2 2 0 0 1-2-1.5L5 13z"/></symbol>
+    <symbol id="i-call" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5z"/><path d="M4 19a2 2 0 0 1 2-2h13"/><path d="M9 7h6M9 10.5h6"/></symbol>
+  </svg>
+
+  <!-- ===================== THANH TIÊU ĐỀ ===================== -->
+  <header class="appbar">
+    <div class="appbar-in">
+      <img class="ab-logo" src="/icons/icon-192.png" alt="">
+      <div class="ab-text">
+        <div class="ab-title" id="screen-title">Tra cứu ngày giỗ</div>
+        <div class="ab-sub" id="screen-sub"></div>
+      </div>
+      <button class="ab-btn" type="button" id="btn-settings" aria-label="Cài đặt"><svg width="22" height="22"><use href="#i-set"/></svg></button>
+    </div>
+  </header>
+
+  <main class="app">
+    <div id="storage-banner" class="hidden"></div>
+
+    <!-- ===================== TRANG CHỦ (chỉ xem) ===================== -->
+    <section id="screen-trangchu" class="screen" aria-label="Trang chủ">
+      <div class="home-hero" id="home-hero"></div>
+      <div class="home-bar">
+        <div class="search home-search">
+          <svg width="22" height="22"><use href="#i-search"/></svg>
+          <input id="home-search" type="search" placeholder="Tìm người đã khuất" autocomplete="off" aria-label="Tìm người đã khuất">
+        </div>
+      </div>
+      <div id="home-list"></div>
+    </section>
+
+    <!-- ===================== 1. NHẬP NGÀY GIỖ ===================== -->
+    <section id="screen-nhap" class="screen" aria-label="Nhập ngày giỗ">
+      <form id="form" novalidate autocomplete="off">
+        <div class="edit-banner hidden" id="edit-banner">
+          <svg width="20" height="20"><use href="#i-edit"/></svg>
+          <span class="eb-text">Đang sửa: <b id="edit-name"></b></span>
+          <button class="btn btn-sm btn-light" type="button" id="btn-cancel-edit">Hủy sửa</button>
+        </div>
+
+        <div class="card step">
+          <div class="step-head"><span class="step-no">1</span><span>Người đã khuất</span></div>
+          <div class="field">
+            <label for="f-name">Họ và tên <span class="req">*</span></label>
+            <input class="input" id="f-name" maxlength="80" placeholder="Ví dụ: Nguyễn Văn An" autocapitalize="words">
+          </div>
+          <div class="field">
+            <label for="f-title">Danh xưng (quan hệ gia đình) <span class="req">*</span></label>
+            <select class="input" id="f-title"></select>
+            <input class="input hidden" id="f-custom" style="margin-top:8px" maxlength="40" placeholder="Nhập danh xưng, ví dụ: Ông bác">
+          </div>
+        </div>
+
+        <div class="card step">
+          <div class="step-head"><span class="step-no">2</span><span>Ngày giỗ âm lịch</span><span class="req">*</span></div>
+          <div class="grid2">
+            <div class="field"><label for="f-day">Ngày</label><select class="input" id="f-day"></select></div>
+            <div class="field"><label for="f-month">Tháng</label><select class="input" id="f-month"></select></div>
+          </div>
+          <label class="check"><input type="checkbox" id="f-leap"> Mất vào tháng nhuận</label>
+          <div class="subbox hidden" id="box-leap">
+            <div class="label">Năm sau giỗ vào tháng nào?</div>
+            <div class="radio-group">
+              <label class="radio"><input type="radio" name="leapRule" value="regular" checked><span>Tháng thường<span class="small">Giỗ hằng năm vào tháng thường (cách làm phổ biến).</span></span></label>
+              <label class="radio"><input type="radio" name="leapRule" value="leap"><span>Tháng nhuận<span class="small">Năm có tháng nhuận đó thì giỗ tháng nhuận; năm không có thì giỗ tháng thường.</span></span></label>
+            </div>
+          </div>
+          <div class="subbox hidden" id="box-missing">
+            <div class="label">Năm nào tháng chỉ có 29 ngày (tháng thiếu):</div>
+            <div class="radio-group">
+              <label class="radio"><input type="radio" name="missingRule" value="last" checked><span>Giỗ ngày 29<span class="small">Ngày cuối cùng của tháng đó.</span></span></label>
+              <label class="radio"><input type="radio" name="missingRule" value="next"><span>Giỗ mùng 1 tháng sau</span></label>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-year">Năm mất (năm âm lịch, không bắt buộc)</label>
+            <input class="input" id="f-year" type="number" inputmode="numeric" min="1800" max="2199" placeholder="Ví dụ: 1998">
+            <p class="hint navy" id="f-year-hint"></p>
+          </div>
+        </div>
+
+        <div class="card step">
+          <div class="step-head"><span class="step-no muted">3</span><span>Thông tin thêm</span><span class="opt">không bắt buộc</span></div>
+          <div class="field"><label for="f-home">Quê quán</label><input class="input" id="f-home" maxlength="120" placeholder="Ví dụ: Hưng Nguyên, Nghệ An"></div>
+          <div class="field"><label for="f-branch">Chi họ</label><input class="input" id="f-branch" maxlength="120" placeholder="Ví dụ: Chi 3"></div>
+          <div class="field"><label for="f-note">Ghi chú</label><textarea class="input" id="f-note" maxlength="1000" placeholder="Nơi an táng, người lo giỗ, món cúng..."></textarea></div>
+        </div>
+
+        <div class="preview" id="f-preview"></div>
+        <div class="errors hidden" id="f-errors"></div>
+        <button class="btn btn-red btn-block btn-xl" type="submit" id="btn-save"><svg width="22" height="22"><use href="#i-save"/></svg> <span id="btn-save-text">Lưu ngày giỗ</span></button>
+      </form>
+
+      <div class="section-title"><span>Danh sách đã nhập</span><span class="count" id="count"></span></div>
+      <div class="search">
+        <svg width="22" height="22"><use href="#i-search"/></svg>
+        <input id="search" type="search" placeholder="Tìm theo tên, danh xưng, quê, chi họ" autocomplete="off" enterkeyhint="search" aria-label="Tìm kiếm">
+        <button class="clear hidden" id="search-clear" type="button" aria-label="Xóa tìm kiếm">✕</button>
+      </div>
+      <div id="all" class="list"></div>
+    </section>
+
+    <!-- ===================== 2. TRA CỨU HẰNG NĂM ===================== -->
+    <section id="screen-tracuu" class="screen" aria-label="Tra cứu ngày giỗ hằng năm">
+      <div id="hero"></div>
+      <div id="alerts"></div>
+      <div class="stats" id="stats"></div>
+      <div id="install-banner" class="hidden"></div>
+
+      <div class="seg" role="tablist" aria-label="Cách xem">
+        <button type="button" role="tab" data-seg="sapden" class="on">Sắp đến</button>
+        <button type="button" role="tab" data-seg="theonam">Theo từng năm</button>
+      </div>
+
+      <div id="seg-sapden">
+        <div class="search">
+          <svg width="22" height="22"><use href="#i-search"/></svg>
+          <input id="up-search" type="search" placeholder="Tìm tên hoặc danh xưng" autocomplete="off" aria-label="Tìm">
+        </div>
+        <div id="upcoming" class="list"></div>
+      </div>
+
+      <div id="seg-theonam" class="hidden">
+        <div class="card year-bar">
+          <button class="icon-btn" type="button" id="yr-prev" aria-label="Năm trước"><svg width="22" height="22"><use href="#i-back"/></svg></button>
+          <div class="yr-mid"><div class="yr-big" id="yr-label"></div><div class="small" id="yr-sub"></div></div>
+          <button class="icon-btn flip" type="button" id="yr-next" aria-label="Năm sau"><svg width="22" height="22"><use href="#i-back"/></svg></button>
+        </div>
+        <div id="yr-list"></div>
+      </div>
+    </section>
+
+    <!-- ===================== 3. LỊCH ÂM DƯƠNG ===================== -->
+    <section id="screen-lich" class="screen" aria-label="Xem lịch âm dương">
+      <div class="card cal-card">
+        <div class="cal-head">
+          <button class="icon-btn" type="button" id="cal-prev" aria-label="Tháng trước"><svg width="22" height="22"><use href="#i-back"/></svg></button>
+          <div class="cal-title"><div class="yr-big" id="cal-title"></div><div class="small" id="cal-sub"></div></div>
+          <button class="icon-btn flip" type="button" id="cal-next" aria-label="Tháng sau"><svg width="22" height="22"><use href="#i-back"/></svg></button>
+        </div>
+        <div class="cal-grid cal-dow"><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span><span class="red">CN</span></div>
+        <div class="cal-grid" id="cal-grid"></div>
+        <div class="legend">
+          <span><i class="lg lg-gio"></i>Ngày giỗ (chạm để xem)</span>
+          <span><i class="lg lg-today"></i>Hôm nay</span>
+        </div>
+        <button class="btn btn-light btn-block" style="margin-top:10px" type="button" id="cal-today">Về hôm nay</button>
+      </div>
+
+      <div class="section-title"><span id="cal-list-title">Ngày giỗ trong tháng</span><span class="count" id="cal-count"></span></div>
+      <div id="cal-list" class="list"></div>
+
+      <div class="section-title"><span>Ngày đang chọn</span></div>
+      <div class="card" id="day-info"></div>
+
+      <div class="section-title"><span>Công cụ đổi ngày</span></div>
+      <details class="card tool" id="tool-solar">
+        <summary>Đổi dương lịch → âm lịch</summary>
+        <div class="content">
+          <input class="input" id="cv-solar" type="date" aria-label="Chọn ngày dương lịch">
+          <div id="cv-solar-result"></div>
+        </div>
+      </details>
+      <details class="card tool" id="tool-lunar">
+        <summary>Đổi âm lịch → dương lịch</summary>
+        <div class="content">
+          <div class="grid2">
+            <div class="field"><label for="cv-day">Ngày</label><select class="input" id="cv-day"></select></div>
+            <div class="field"><label for="cv-month">Tháng</label><select class="input" id="cv-month"></select></div>
+          </div>
+          <div class="field"><label for="cv-year">Năm âm lịch</label><input class="input" id="cv-year" type="number" inputmode="numeric" min="1800" max="2199"></div>
+          <label class="check"><input type="checkbox" id="cv-leap"> Tháng nhuận</label>
+          <div id="cv-lunar-result"></div>
+        </div>
+      </details>
+      <details class="card tool" id="tool-months">
+        <summary id="mt-title">Bảng tháng âm lịch</summary>
+        <div class="content">
+          <div class="grid2">
+            <button class="btn btn-light" type="button" id="mt-prev">‹ Năm trước</button>
+            <button class="btn btn-light" type="button" id="mt-next">Năm sau ›</button>
+          </div>
+          <table class="mtable"><thead><tr><th>Tháng</th><th>Mùng 1 dương lịch</th><th>Số ngày</th></tr></thead><tbody id="mt-body"></tbody></table>
+          <p class="hint">Tháng thiếu có 29 ngày, tháng đủ có 30 ngày. Dòng chữ đỏ là tháng nhuận.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- ===================== 4. BÀI CÚNG ===================== -->
+    <section id="screen-baicung" class="screen" aria-label="Các bài cúng tham khảo">
+      <details class="card tool" id="bc-info">
+        <summary>Thông tin điền vào bài khấn</summary>
+        <div class="content">
+          <div class="field"><label for="bc-tinchu">Người khấn (tín chủ)</label><input class="input" id="bc-tinchu" maxlength="80" placeholder="Ví dụ: Nguyễn Văn Bình"></div>
+          <div class="field"><label for="bc-diachi">Địa chỉ</label><input class="input" id="bc-diachi" maxlength="160" placeholder="Ví dụ: Xóm Hưng Thái, xã Hưng Nguyên, Nghệ An"></div>
+          <div class="field"><label for="bc-ho">Dòng họ</label><input class="input" id="bc-ho" maxlength="40" placeholder="Ví dụ: Hồ"></div>
+          <p class="hint">Thông tin lưu trên máy này và tự điền vào mọi bài khấn. Ngày tháng âm lịch được tự tính theo lần cúng tới.</p>
+        </div>
+      </details>
+      <div class="chips" id="bc-chips"></div>
+      <div id="bc-list"></div>
+      <p class="hint" style="margin:14px 4px 0">Bài khấn soạn theo lối văn khấn cổ truyền phổ biến, để tham khảo. Mỗi vùng, mỗi gia đình có thể khác; khấn bằng lòng thành là chính.</p>
+    </section>
+
+    <!-- ===================== CHÂN TRANG ===================== -->
+    <footer class="credit">
+      <img src="/icons/icon-192.png" alt="">
+      <div class="cr-text">
+        <div class="cr-app">Phần mềm Tra cứu ngày giỗ</div>
+        <div class="cr-author">Tác giả: <b>Hồ Nam Tấn</b></div>
+        <a class="cr-tel" href="tel:0914587575"><svg width="16" height="16"><use href="#i-call"/></svg> Điện thoại: 0914 587 575</a>
+      </div>
+    </footer>
+  </main>
+
+  <!-- ===================== THANH ĐIỀU HƯỚNG ===================== -->
+  <nav class="nav" aria-label="Điều hướng">
+    <div class="nav-inner">
+      <button type="button" data-screen="nhap"><span class="nv-ic"><svg width="22" height="22"><use href="#i-edit"/></svg></span>Nhập giỗ</button>
+      <button type="button" data-screen="tracuu"><span class="nv-ic"><svg width="22" height="22"><use href="#i-search"/></svg><b class="nv-badge hidden" id="nav-badge"></b></span>Tra cứu</button>
+      <button type="button" data-screen="trangchu" class="nav-home"><span class="nv-ic"><svg width="26" height="26"><use href="#i-home"/></svg></span>Trang chủ</button>
+      <button type="button" data-screen="lich"><span class="nv-ic"><svg width="22" height="22"><use href="#i-cal"/></svg></span><span class="lb-long">Âm dương</span><span class="lb-short">Lịch</span></button>
+      <button type="button" data-screen="baicung"><span class="nv-ic"><svg width="22" height="22"><use href="#i-incense"/></svg></span>Bài cúng</button>
+    </div>
+  </nav>
+
+  <!-- ===================== CÀI ĐẶT ===================== -->
+  <div class="sheet" id="sheet-settings" role="dialog" aria-modal="true" aria-label="Cài đặt">
+    <div class="sheet-head">
+      <button class="icon-btn" type="button" data-close="sheet-settings" aria-label="Quay lại"><svg width="22" height="22"><use href="#i-back"/></svg></button>
+      <h2>Cài đặt</h2>
+      <span></span>
+    </div>
+    <div class="sheet-body">
+
+      <div class="card">
+        <div class="set-item">
+          <div class="ic red"><svg width="22" height="22"><use href="#i-bell"/></svg></div>
+          <div class="tx">
+            <h3>Thông báo nhắc giỗ</h3>
+            <p>Nhắc trước ngày giỗ 5 ngày, khoảng 7–8 giờ sáng, kể cả khi không mở ứng dụng.</p>
+            <div id="push-status"></div>
+          </div>
+        </div>
+        <div id="push-actions" style="margin-top:12px"></div>
+        <label class="check"><input type="checkbox" id="opt-dayof"> Nhắc thêm vào đúng ngày giỗ</label>
+      </div>
+
+      <div class="card">
+        <div class="set-item">
+          <div class="ic"><svg width="22" height="22"><use href="#i-cal"/></svg></div>
+          <div class="tx">
+            <h3>Thêm vào Lịch của điện thoại</h3>
+            <p>Đưa ngày giỗ 10 năm tới vào ứng dụng Lịch, có nhắc trước 5 ngày. Đây là cách nhắc dự phòng rất chắc chắn.</p>
+          </div>
+        </div>
+        <button class="btn btn-light btn-block" style="margin-top:12px" type="button" id="btn-ics"><svg width="20" height="20"><use href="#i-save"/></svg> Tạo tệp lịch (.ics)</button>
+      </div>
+
+      <div class="card">
+        <div class="set-item">
+          <div class="ic"><svg width="22" height="22"><use href="#i-save"/></svg></div>
+          <div class="tx">
+            <h3>Sao lưu và khôi phục</h3>
+            <p>Dữ liệu lưu ngay trên điện thoại này. Hãy sao lưu định kỳ và cất tệp vào Zalo, Google Drive hoặc iCloud.</p>
+            <div id="backup-status"></div>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-primary" type="button" id="btn-export"><svg width="20" height="20"><use href="#i-save"/></svg> Sao lưu</button>
+          <button class="btn btn-light" type="button" id="btn-import"><svg width="20" height="20"><use href="#i-upload"/></svg> Khôi phục</button>
+        </div>
+        <input type="file" id="file-import" accept="application/json,.json" class="hidden">
+      </div>
+
+      <div class="card">
+        <div class="set-item">
+          <div class="ic"><svg width="22" height="22"><use href="#i-phone"/></svg></div>
+          <div class="tx">
+            <h3>Cài ứng dụng lên màn hình chính</h3>
+            <div id="install-help"></div>
+          </div>
+        </div>
+      </div>
+
+      <details class="card">
+        <summary>Cách tính ngày giỗ</summary>
+        <div class="content">
+          <p>Âm lịch tính theo lịch Việt Nam (múi giờ UTC+7), đúng với lịch nhà nước ban hành; có năm Tết khác lịch Trung Quốc (ví dụ 1985, 2007, 2030).</p>
+          <p><b>Người mất vào tháng nhuận:</b> anh/chị tự chọn giỗ vào tháng thường hay tháng nhuận. Nếu chọn tháng nhuận mà năm đó không có tháng nhuận tương ứng, ứng dụng giỗ vào tháng thường và ghi rõ lý do.</p>
+          <p><b>Người mất tháng thường</b> mà năm đó có thêm tháng nhuận cùng số: giỗ vào tháng thường (tháng đầu), có ghi chú.</p>
+          <p><b>Người mất ngày 30</b> mà năm đó tháng chỉ có 29 ngày: anh/chị chọn giỗ ngày 29 (ngày cuối tháng) hoặc mùng 1 tháng sau. Mọi trường hợp đổi ngày đều được ghi chú màu đỏ.</p>
+        </div>
+      </details>
+
+      <details class="card">
+        <summary>Giới hạn của thông báo</summary>
+        <div class="content">
+          <ul>
+            <li>iPhone/iPad: cần iOS 16.4 trở lên và phải cài ứng dụng ra Màn hình chính, mở từ biểu tượng rồi mới bật được thông báo.</li>
+            <li>Android: cần Chrome (hoặc trình duyệt hỗ trợ). Không tắt thông báo của Chrome; với Xiaomi, Oppo, Vivo, Samsung nên tắt “Tiết kiệm pin” cho Chrome.</li>
+            <li>Chế độ Không làm phiền, Tập trung hoặc tắt mạng có thể làm thông báo đến chậm hoặc không hiện.</li>
+            <li>Máy chủ gửi nhắc mỗi ngày một lần trong khoảng 7–8 giờ sáng (giờ Việt Nam).</li>
+            <li>Nếu xóa dữ liệu trình duyệt hoặc gỡ ứng dụng, cần bật lại thông báo và khôi phục từ tệp sao lưu.</li>
+            <li>Để chắc chắn nhất, hãy dùng thêm “Thêm vào Lịch của điện thoại”.</li>
+          </ul>
+        </div>
+      </details>
+      <p class="hint" style="text-align:center;margin-top:14px" id="app-version"></p>
+    </div>
+  </div>
+
+  <!-- ===================== CHI TIẾT ===================== -->
+  <div class="sheet" id="sheet-detail" role="dialog" aria-modal="true" aria-label="Chi tiết hồ sơ">
+    <div class="sheet-head">
+      <button class="icon-btn" type="button" data-close="sheet-detail" aria-label="Quay lại"><svg width="22" height="22"><use href="#i-back"/></svg></button>
+      <h2>Chi tiết ngày giỗ</h2>
+      <button class="icon-btn" type="button" id="d-edit" aria-label="Sửa"><svg width="22" height="22"><use href="#i-edit"/></svg></button>
+    </div>
+    <div class="sheet-body" id="detail-body"></div>
+  </div>
+
+  <!-- ===================== CỬA SỔ NGÀY GIỖ (chạm vào lịch) ===================== -->
+  <div class="modal" id="pop" role="dialog" aria-modal="true" aria-labelledby="pop-title">
+    <div class="modal-box pop-box">
+      <div class="pop-head">
+        <div><div class="pop-kicker">Ngày giỗ</div><h3 id="pop-title"></h3><div class="small" id="pop-sub"></div></div>
+        <button class="icon-btn" type="button" id="pop-close" aria-label="Đóng"><svg width="20" height="20"><use href="#i-close"/></svg></button>
+      </div>
+      <div id="pop-body"></div>
+    </div>
+  </div>
+
+  <!-- ===================== HỘP THOẠI ===================== -->
+  <div class="modal" id="modal" role="alertdialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box">
+      <h3 id="modal-title"></h3>
+      <div class="msg" id="modal-msg"></div>
+      <div class="modal-actions" id="modal-actions"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"><span id="toast-msg"></span></div>
+
+  <script src="/gio-core.js"></script>
+  <script src="/bai-cung.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

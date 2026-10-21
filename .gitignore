@@ -1,0 +1,8 @@
+node_modules/
+.vercel/
+.env
+.env.*
+*.log
+.DS_Store
+KHOA-BI-MAT.txt
+generate_keys.js
