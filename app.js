@@ -586,17 +586,7 @@
       yh += lm ? ' — có tháng ' + lm + ' nhuận' : ' — không có tháng nhuận';
     }
     $('f-year-hint').textContent = yh;
-    // Xem trước ngày giỗ kế tiếp
-    var pv = $('f-preview');
-    if (p.day >= 1 && p.month >= 1) {
-      var t = today(), occ = G.nextOccurrence(p, t);
-      if (occ) {
-        var left = occ.jd - t;
-        pv.innerHTML = '<div class="label">Ngày giỗ tới</div><div class="v">' + esc(G.weekdayName(occ.jd)) + ', ' + esc(G.solarText(occ.jd)) +
-          ' — ' + esc(countText(left).toLowerCase()) + '</div><div class="small">Tức ngày ' + esc(G.lunarText(occ.lunarDay, occ.lunarMonth, occ.lunarLeap)) +
-          ' năm ' + esc(G.canChiYear(occ.lunarYear)) + '</div>' + occ.notes.map(function (n) { return '<div class="note">' + esc(n) + '</div>'; }).join('');
-      }
-    }
+    // Đã bỏ khối Ngày giỗ tới theo yêu cầu
   }
 
   function resetForm() {
