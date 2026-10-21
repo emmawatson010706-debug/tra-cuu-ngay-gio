@@ -413,7 +413,7 @@
         '<span class="tv-medal"><span class="d">' + o.lunarDay + '</span><span class="m">' + (o.lunarLeap ? 'th.' + o.lunarMonth + ' nhuận' : 'tháng ' + o.lunarMonth) + '</span></span>' +
         '<span class="tv-main"><span class="tv-title">' + esc(G.displayTitle(p)) + '</span><span class="tv-name">' + esc(p.name) + '</span>' +
           '<span class="tv-sol">Dương lịch: ' + esc(solarLong(o.jd)) + '</span></span>' +
-        '<span class="tv-ring">' + ringSVG(x.left, 56) + '<span class="tv-ring-in">' + countBlock(x.left) + '</span></span>' +
+        '<span class="tv-ring">' + ringSVG(x.left, 46) + '<span class="tv-ring-in">' + countBlock(x.left) + '</span></span>' +
       '</button>' +
       '<div class="tv-body">' +
         '<dl class="tv-dl">' + rows.map(function (r) { return '<div><dt>' + r[0] + '</dt><dd>' + esc(r[1]).replace(/\n/g, '<br>') + '</dd></div>'; }).join('') + '</dl>' +
