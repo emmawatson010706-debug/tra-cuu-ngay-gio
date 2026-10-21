@@ -1167,6 +1167,7 @@
   function bind() {
     document.querySelectorAll('.nav button').forEach(function (b) { b.onclick = function () { tap(); showScreen(b.dataset.screen); }; });
     $('btn-settings').onclick = function () { tap(); openSettings(); };
+    var bg = $('btn-guide'); if (bg) bg.onclick = function () { tap(); openSheet('sheet-guide'); };
     $('pop-close').onclick = closePop;
     $('pop').addEventListener('click', function (e) { if (e.target === this) closePop(); });
     document.addEventListener('click', function (e) {

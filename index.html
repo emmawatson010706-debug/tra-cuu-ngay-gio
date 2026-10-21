@@ -38,6 +38,7 @@
     <symbol id="i-incense" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 13V7M12 13V5M15 13V7"/><path d="M5 13h14l-1.5 5.5a2 2 0 0 1-2 1.5h-7a2 2 0 0 1-2-1.5L5 13z"/></symbol>
     <symbol id="i-call" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
     <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
     <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5z"/><path d="M4 19a2 2 0 0 1 2-2h13"/><path d="M9 7h6M9 10.5h6"/></symbol>
   </svg>
 
@@ -49,6 +50,7 @@
         <div class="ab-title" id="screen-title">Tra cứu ngày giỗ</div>
         <div class="ab-sub" id="screen-sub"></div>
       </div>
+      <button class="ab-btn" type="button" id="btn-guide" aria-label="Hướng dẫn sử dụng & cài đặt" title="Hướng dẫn"><svg width="22" height="22"><use href="#i-help"/></svg></button>
       <button class="ab-btn" type="button" id="btn-settings" aria-label="Cài đặt"><svg width="22" height="22"><use href="#i-set"/></svg></button>
     </div>
   </header>
@@ -243,11 +245,10 @@
 
     <!-- ===================== CHÂN TRANG ===================== -->
     <footer class="credit">
-      <img src="/icons/icon-192.png" alt="">
       <div class="cr-text">
-        <div class="cr-app">Phần mềm Tra cứu ngày giỗ</div>
+        <div class="cr-app">Phần mềm Tra cứu ngày giỗ · <span class="cr-ver">Phiên bản 1.3.0</span></div>
         <div class="cr-author">Tác giả: <b>Hồ Nam Tấn</b></div>
-        <a class="cr-tel" href="tel:0914587575"><svg width="16" height="16"><use href="#i-call"/></svg> Điện thoại: 0914 587 575</a>
+        <a class="cr-tel" href="tel:0914587575"><svg width="15" height="15"><use href="#i-call"/></svg> Điện thoại: 0914 587 575</a>
       </div>
     </footer>
   </main>
@@ -346,6 +347,78 @@
         </div>
       </details>
       <p class="hint" style="text-align:center;margin-top:14px" id="app-version"></p>
+    </div>
+  </div>
+
+
+  <!-- ===================== HƯỚNG DẪN SỬ DỤNG & CÀI ĐẶT ===================== -->
+  <div class="sheet" id="sheet-guide" role="dialog" aria-modal="true" aria-label="Hướng dẫn sử dụng và cài đặt">
+    <div class="sheet-head">
+      <button class="icon-btn" type="button" data-close="sheet-guide" aria-label="Quay lại"><svg width="22" height="22"><use href="#i-back"/></svg></button>
+      <h2>Hướng dẫn sử dụng</h2>
+      <span></span>
+    </div>
+    <div class="sheet-body">
+      <div class="card">
+        <div class="step-head"><span class="step-no">1</span><span>Cách cài ứng dụng lên điện thoại</span></div>
+        <div class="guide-box">
+          <p class="bold navy" style="margin-top:6px">📱 Dành cho iPhone / iPad (Safari):</p>
+          <ol class="steps">
+            <li>Mở đường link bằng trình duyệt <b>Safari</b>.</li>
+            <li>Bấm nút <b>Chia sẻ</b> ở thanh dưới cùng (biểu tượng hình ô vuông có mũi tên chỉ lên).</li>
+            <li>Cuộn xuống chọn <b>“Thêm vào MH chính”</b> (Add to Home Screen).</li>
+            <li>Bấm <b>Thêm</b> (Add) ở góc trên bên phải.</li>
+            <li>Quay ra màn hình chính, mở ứng dụng từ biểu tượng vừa thêm để chạy toàn màn hình và nhận thông báo.</li>
+          </ol>
+
+          <p class="bold navy" style="margin-top:14px">📱 Dành cho điện thoại Android (Chrome / Cốc Cốc):</p>
+          <ol class="steps">
+            <li>Mở đường link bằng trình duyệt <b>Chrome</b>.</li>
+            <li>Bấm nút <b>Cài ứng dụng</b> xuất hiện ở phần Cài đặt, hoặc bấm nút <b>3 chấm ⋮</b> ở góc trên bên phải màn hình.</li>
+            <li>Chọn <b>“Cài đặt ứng dụng”</b> hoặc <b>“Thêm vào màn hình chính”</b>.</li>
+            <li>Xác nhận <b>Cài đặt</b>. Ứng dụng sẽ xuất hiện trên màn hình điện thoại như một app bình thường.</li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:12px">
+        <div class="step-head"><span class="step-no">2</span><span>Cách nhập ngày giỗ âm lịch</span></div>
+        <div class="guide-box">
+          <ul class="steps">
+            <li>Vào thẻ <b>Nhập giỗ</b> ở thanh dưới.</li>
+            <li>Điền <b>Họ và tên</b> và chọn <b>Danh xưng</b> (ví dụ: Cha, Mẹ, Cố ông, Cụ tổ...).</li>
+            <li>Chọn <b>Ngày</b> và <b>Tháng âm lịch</b>.</li>
+            <li><b>Người mất vào tháng nhuận:</b> Tích vào ô “Mất vào tháng nhuận” và chọn quy tắc giỗ (năm sau giỗ tháng thường hay tháng nhuận).</li>
+            <li><b>Người mất ngày 30:</b> Nếu gặp năm tháng thiếu chỉ có 29 ngày, ứng dụng tự động hỏi anh/chị muốn giỗ ngày 29 (cuối tháng) hay mùng 1 tháng sau.</li>
+            <li>Nhập thêm năm mất, quê quán, chi họ, ghi chú nếu muốn → Bấm <b>Lưu ngày giỗ</b>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:12px">
+        <div class="step-head"><span class="step-no">3</span><span>Cách tra cứu & xem ngày giỗ</span></div>
+        <div class="guide-box">
+          <ul class="steps">
+            <li><b>Trang chủ:</b> Hiển thị ngày âm lịch hôm nay, người có giỗ sắp tới nhất cùng đồng hồ đếm ngược số ngày. Chạm vào từng bài vị để xem chi tiết.</li>
+            <li><b>Tra cứu:</b> Xem danh sách toàn bộ ngày giỗ sắp đến theo thứ tự gần nhất, hoặc chuyển sang chế độ “Theo từng năm” để xem lịch giỗ trọn vẹn cả năm âm lịch.</li>
+            <li><b>Âm dương (Lịch):</b> Lịch tháng âm dương song hành. Ngày nào có giỗ sẽ nổi bật thành nút đỏ trang trọng. Chạm vào nút đỏ để xem danh sách và mở bài khấn.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:12px">
+        <div class="step-head"><span class="step-no">4</span><span>Cài đặt thông báo & sao lưu</span></div>
+        <div class="guide-box">
+          <ul class="steps">
+            <li>Bấm nút <b>Bánh răng</b> ở góc trên bên phải để vào phần <b>Cài đặt</b>.</li>
+            <li><b>Bật thông báo nhắc giỗ:</b> Hệ thống sẽ gửi thông báo nhắc trước 5 ngày và đúng ngày giỗ vào 7–8 giờ sáng.</li>
+            <li><b>Thêm vào Lịch điện thoại (.ics):</b> Bấm 1 nút để nạp ngày giỗ 10 năm tới vào ứng dụng Lịch (Calendar) trên điện thoại, có sẵn chuông báo trước 5 ngày không lo mất mạng.</li>
+            <li><b>Sao lưu dữ liệu:</b> Bấm “Sao lưu” để tải tệp dự phòng lưu vào Zalo hoặc Google Drive. Khi đổi máy điện thoại, chỉ cần bấm “Khôi phục” là có lại toàn bộ ngày giỗ.</li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-block" style="margin-top:16px" type="button" data-close="sheet-guide">Đã hiểu và quay lại</button>
     </div>
   </div>
 

@@ -379,15 +379,43 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
 .p-tools { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 10px; }
 
 /* ====== Chân trang tác giả ====== */
-.credit { display: flex; align-items: center; gap: 12px; margin-top: 26px; padding: 14px; border-radius: var(--r);
-  background: linear-gradient(160deg, #1d4280, #0e2a55); color: #fff; box-shadow: 0 12px 26px -12px rgba(10,31,64,.7); border: 1px solid rgba(233,207,138,.45); }
-.credit img { width: 46px; height: 46px; border-radius: 13px; flex: none; box-shadow: 0 0 0 2px rgba(233,207,138,.5); }
-.cr-text { min-width: 0; }
-.cr-app { font-size: 13px; color: #e9cf8a; }
-.cr-author { font-size: 15px; }
-.cr-author b { font-weight: 700; }
-.cr-tel { display: inline-flex; align-items: center; gap: 6px; margin-top: 4px; font-size: 15px; font-weight: 700; color: #fff; text-decoration: none; padding: 6px 12px; border-radius: 999px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.28); white-space: nowrap; }
+.credit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 18px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: linear-gradient(160deg, #1d4280, #0e2a55);
+  color: #fff;
+  box-shadow: 0 4px 12px -4px rgba(10,31,64,.5);
+  border: 1px solid rgba(233,207,138,.35);
+}
+.cr-text { width: 100%; }
+.cr-app { font-size: 13px; color: #e9cf8a; font-weight: 600; }
+.cr-ver { opacity: 0.9; font-weight: normal; color: #f4f5f8; }
+.cr-author { font-size: 14px; margin-top: 2px; }
+.cr-author b { font-weight: 700; color: #fff; }
+.cr-tel {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.14);
+  border: 1px solid rgba(255,255,255,.25);
+  white-space: nowrap;
+}
 .cr-tel:active { background: rgba(255,255,255,.25); }
+.guide-box { margin-top: 6px; font-size: 14px; line-height: 1.6; }
+.guide-box ol, .guide-box ul { padding-left: 20px; margin: 4px 0 0; }
+.guide-box li { margin-bottom: 6px; }
 
 /* ====== Thanh điều hướng dưới ====== */
 .nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding: 6px 8px calc(6px + var(--safe-b));
@@ -432,7 +460,7 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
   .hero-count { min-width: 74px; height: 74px; }
   .hero-count .n { font-size: 30px; }
   .nav button { font-size: 13px; letter-spacing: -.2px; }
-  .credit { flex-direction: column; text-align: center; }
+  
   .hero-actions { grid-template-columns: 1fr; }
   .hero .btn { padding: 0 10px; }
   .cr-text { width: 100%; }
