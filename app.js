@@ -540,7 +540,7 @@
   }
   function renderHeaderDate() {
     var t = today(), L = G.jdToLunar(t);
-    $('screen-sub').textContent = G.solarText(t) + ' · Âm lịch ' + G.lunarText(L.day, L.month, L.leap) + ' ' + G.canChiYear(L.year);
+    $('screen-sub').textContent = G.solarText(t) + ' · ÂL ' + L.day + '/' + L.month + (L.leap ? 'n' : '') + ' ' + G.canChiYear(L.year);
   }
 
   /* ================= Biểu mẫu thêm / sửa ================= */
