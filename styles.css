@@ -498,20 +498,170 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
 .hh-count { flex: none; text-align: center; padding: 8px 10px; border-radius: 14px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); }
 .hh-count b { display: block; font-size: 22px; line-height: 1.1; color: #fff; }
 .hh-count span { font-size: 13px; color: #dfe6f3; line-height: 1.25; display: block; }
-.hh-next { display: grid; grid-template-columns: auto 1fr; gap: 14px; align-items: center; margin-top: 16px; padding: 14px; border-radius: 18px;
-  background: linear-gradient(150deg, rgba(200,30,43,.95), rgba(122,10,18,.95)); border: 1px solid rgba(233,207,138,.55); box-shadow: 0 12px 24px -12px rgba(0,0,0,.6); }
-.hh-ring { position: relative; width: 84px; height: 84px; }
-.hh-ring .ring-bg { stroke: rgba(255,255,255,.2); }
-.hh-ring .ring-fg { stroke: #f1d88f; }
-.hh-ring-in { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-.hh-ring .cb-n { font-size: 28px; font-weight: 700; line-height: 1; color: #fff; }
-.hh-ring .cb-u { font-size: 13px; color: #fde6b0; }
-.hh-ring .cb-today { font-size: 13px; line-height: 1.15; text-align: center; text-transform: uppercase; }
-.hh-next-tx { min-width: 0; }
-.hh-who { font-size: 15px; font-weight: 700; overflow-wrap: anywhere; }
-.hh-who span { color: #f3dc9e; text-transform: uppercase; font-size: 13px; letter-spacing: .3px; }
-.hh-when { font-size: 15px; font-weight: 700; color: #fde6b0; margin-top: 2px; }
-.hh-next .hh-sol { color: #ffe3e5; }
+/* ====== Khung trợ lý gia đạo sơn mài (Phương án 2) ====== */
+.hh-assistant {
+  position: relative;
+  overflow: hidden;
+  margin-top: 14px;
+  padding: 14px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(233,207,138,.65);
+  box-shadow: 0 1px 0 rgba(255,255,255,.2) inset, 0 12px 24px -10px rgba(0,0,0,.6);
+}
+.hh-assistant::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 14px;
+  border: 1px dashed rgba(233,207,138,.35);
+  pointer-events: none;
+}
+
+/* Kiểu hoành phi sơn mài bình thường (khi ngày giỗ còn xa) */
+.hh-card-idle {
+  background: linear-gradient(155deg, #a6121d 0%, #7d0c14 55%, #56070c 100%);
+  text-align: center;
+  padding: 16px 14px;
+}
+.hh-hoanhphi {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #fbefc7;
+  text-shadow: 0 1px 2px rgba(0,0,0,.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.hh-hoanhphi .hp-orn {
+  color: #dfb75c;
+  font-size: 12px;
+}
+.hh-hp-sub {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  color: #e9cf8a;
+  margin-top: 3px;
+  opacity: .95;
+}
+.hh-hp-caudoi {
+  margin: 10px 0 8px;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(0,0,0,.15);
+  border: 1px solid rgba(233,207,138,.2);
+}
+.hp-line {
+  font-size: 13.5px;
+  font-style: italic;
+  color: #fff9ea;
+  line-height: 1.45;
+}
+.hh-hp-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: #ffe6aa;
+  margin-top: 4px;
+  padding: 3px 8px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.08);
+}
+.hh-hp-wish {
+  font-size: 12px;
+  color: #e3d2bf;
+  margin-top: 6px;
+  line-height: 1.35;
+}
+.hh-hp-msg {
+  font-size: 13px;
+  color: #f7ede1;
+  margin-top: 8px;
+  line-height: 1.45;
+}
+.hh-btn-center {
+  margin-top: 10px;
+}
+
+/* Kiểu nhắc việc cúng giỗ khẩn trương (khi <= 5 ngày hoặc hôm nay) */
+.hh-card-urgent {
+  background: linear-gradient(155deg, #c01825 0%, #8f0e17 55%, #63080e 100%);
+}
+.hh-card-urgent.is-today {
+  background: linear-gradient(155deg, #d41e2c 0%, #9e101a 55%, #6e0911 100%);
+  border-color: #ffd875;
+  box-shadow: 0 0 0 2px rgba(255,216,117,.3), 0 14px 28px -10px rgba(0,0,0,.7);
+}
+.hh-urgent-header {
+  text-align: center;
+  margin-bottom: 6px;
+}
+.hh-urgent-tag {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  color: #3d2700;
+  background: linear-gradient(180deg, #fcebb1, #e0ba63);
+  box-shadow: 0 2px 6px rgba(0,0,0,.35);
+}
+.hh-card-urgent.is-today .hh-urgent-tag {
+  background: linear-gradient(180deg, #fff3c9, #f7cb59);
+  color: #700c14;
+}
+.hh-urgent-who {
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  margin: 6px 0 2px;
+}
+.hh-urgent-who span {
+  color: #f7dc99;
+  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: .3px;
+}
+.hh-urgent-who b {
+  color: #fff;
+  font-size: 16px;
+}
+.hh-urgent-date {
+  text-align: center;
+  font-size: 13px;
+  color: #fedfa2;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.hh-urgent-tip {
+  font-size: 13px;
+  line-height: 1.45;
+  color: #ffe6e8;
+  margin: 8px 0 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(0,0,0,.15);
+  border: 1px solid rgba(255,255,255,.15);
+  text-align: center;
+}
+.hh-urgent-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 10px;
+}
+.hh-urgent-actions .btn {
+  min-height: 42px;
+  font-size: 13px;
+  padding: 0 8px;
+}
 
 .ring { display: block; }
 .ring circle { fill: none; stroke-width: 5; stroke-linecap: round; }
