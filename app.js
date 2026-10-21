@@ -230,16 +230,29 @@
     var next = rows[0];
     var heroAssistant = '';
 
+    // Tuyển chọn các câu ca dao / tục ngữ lục bát, mỗi vế chuẩn 1 hàng
+    var PROVERBS = [
+      ['“Cây có cội mới trổ cành xanh lá,', 'Nước có nguồn mới bủa khắp rạch sông”'],
+      ['“Con người có tổ có tông,', 'Như cây có cội, như sông có nguồn”'],
+      ['“Công cha như núi Thái Sơn,', 'Nghĩa mẹ như nước trong nguồn chảy ra”'],
+      ['“Ơn sâu dưỡng dục ngàn năm nhớ,', 'Đức trọng sinh thành vạn thuở ghi”'],
+      ['“Ẩm thủy tư nguyên tâm hướng thiện,', 'Vinh hoa phú quý đức lưu truyền”']
+    ];
+    var prov = PROVERBS[(L.day || 1) % PROVERBS.length];
+
     if (!rows.length) {
       // Khi chưa có người nào
       heroAssistant = '<div class="hh-assistant hh-card-idle">' +
         '<div class="hh-hoanhphi"><span class="hp-orn">❖</span> ẨM THỦY TƯ NGUYÊN <span class="hp-orn">❖</span></div>' +
         '<div class="hh-hp-sub">UỐNG NƯỚC NHỚ NGUỒN · VẸN TRÒN ĐẠO HIẾU</div>' +
         '<div class="hh-hp-caudoi">' +
-          '<div class="hp-line">“Cây có cội mới trổ cành xanh lá</div>' +
-          '<div class="hp-line">Nước có nguồn mới bủa khắp rạch sông”</div>' +
+          '<div class="hp-line">' + prov[0] + '</div>' +
+          '<div class="hp-line">' + prov[1] + '</div>' +
         '</div>' +
-        '<p class="hh-hp-msg">Ứng dụng giúp con cháu ghi nhớ ngày giỗ âm lịch, tự tính ngày dương và nhắc nhở chu toàn tiết lễ gia tiên.</p>' +
+        '<div class="hh-status-box">' +
+          '<div class="hh-st-head"><span class="st-dot"></span><span class="st-title">CHƯA CÓ NGÀY GIỖ NÀO ĐƯỢC LƯU</span></div>' +
+          '<div class="hh-st-msg">Nhập ngày giỗ để ứng dụng tự tính âm dương và nhắc nhở con cháu chu toàn tiết lễ.</div>' +
+        '</div>' +
         '<div class="hh-btn-center">' +
           '<button class="btn btn-gold btn-sm" type="button" data-go="nhap">' +
             '<svg width="18" height="18"><use href="#i-plus"/></svg> Nhập ngày giỗ đầu tiên' +
@@ -263,8 +276,8 @@
           '<b>' + esc(lunarPhrase(o.lunarDay, o.lunarMonth, o.lunarLeap)) + ' âm lịch</b> · Dương lịch: ' + esc(solarLong(o.jd)) +
         '</div>' +
         '<p class="hh-urgent-tip">' + (isToday
-          ? 'Hôm nay là ngày húy nhật thiêng liêng. Con cháu tề tựu thắp nén tâm hương, kính cẩn sửa soạn mâm cơm cúng dâng lên trước án gia tiên.'
-          : 'Gia đình hãy chuẩn bị hương hoa trà quả, phẩm vật và thông báo để con cháu sắp xếp thời gian sum họp thắp nén tâm hương tưởng niệm.') + '</p>' +
+          ? 'Hôm nay là ngày húy nhật thiêng liêng. Con cháu kính cẩn thắp nén tâm hương, dâng mâm cơm cúng trước án gia tiên.'
+          : 'Gia đình chuẩn bị hương hoa trà quả, phẩm vật và báo tin để con cháu sắp xếp thời gian sum họp thắp hương tưởng niệm.') + '</p>' +
         '<div class="hh-urgent-actions">' +
           '<button class="btn btn-gold btn-sm" type="button" data-prayer="' + esc(next.p.id) + '">' +
             '<svg width="16" height="16"><use href="#i-book"/></svg> ' + (isToday ? 'Đọc bài văn khấn giỗ' : 'Xem bài văn khấn mẫu') +
@@ -275,40 +288,62 @@
         '</div>' +
       '</div>';
     } else {
-      // Khi ngày giỗ còn xa (> 5 ngày): Khung đỏ trở thành Bức Hoành Phi & Lời Nhắc Gia Đạo (Tránh trùng lặp!)
-      var inMonthCount = 0;
+      // Khi ngày giỗ còn xa (> 5 ngày): Khung đỏ thể hiện bức Hoành Phi & Khối Thông Báo Xanh Nổi Bật nêu rõ người & ngày
+      var inMonthOccs = [];
       state.people.forEach(function (p) {
         var occ = G.resolveOccurrence(p, L.year);
         if (occ && occ.lunarMonth === L.month && occ.lunarLeap === L.leap) {
-          inMonthCount++;
+          inMonthOccs.push({ p: p, occ: occ });
         }
       });
+      inMonthOccs.sort(function(a, b) { return a.occ.jd - b.occ.jd; });
 
-      var monthStatus = inMonthCount > 0
-        ? 'Tháng ' + monthWord(L.month) + (L.leap ? ' nhuận' : '') + ' này: Gia đình có ' + inMonthCount + ' ngày giỗ tưởng niệm gia tiên.'
-        : 'Tháng ' + monthWord(L.month) + (L.leap ? ' nhuận' : '') + ' này: Gia đạo an yên, trong tháng không có tiết giỗ gia tiên.';
+      var statusBoxHtml = '';
+      if (inMonthOccs.length > 0) {
+        // Trong tháng này có giỗ: Liệt kê rõ từng người và ngày tháng
+        var peopleListHtml = inMonthOccs.map(function(x) {
+          return '<div class="st-item">' +
+            '<div class="st-who"><span class="st-rel">' + esc(G.displayTitle(x.p)) + '</span> <b class="st-name">' + esc(x.p.name) + '</b></div>' +
+            '<div class="st-when">Giỗ ngày <b>' + esc(lunarPhrase(x.occ.lunarDay, x.occ.lunarMonth, x.occ.lunarLeap)) + ' ÂL</b> <span class="st-sol">(Dương lịch: ' + esc(solarLong(x.occ.jd)) + ')</span></div>' +
+          '</div>';
+        }).join('');
 
-      // Tuyển chọn các câu ca dao / câu đối đạo hiếu truyền thống Việt Nam
-      var PROVERBS = [
-        ['Cây có cội mới trổ cành xanh lá', 'Nước có nguồn mới bủa khắp rạch sông'],
-        ['Con người có tổ có tông', 'Như cây có cội, như sông có nguồn'],
-        ['Công cha nặng tựa núi non', 'Nghĩa mẹ như nước ngập tràn biển đông'],
-        ['Ơn sâu dưỡng dục ngàn năm nhớ', 'Đức trọng sinh thành vạn thuở ghi'],
-        ['Ẩm thủy tư nguyên tâm hướng thiện', 'Vinh hoa phú quý đức lưu truyền']
-      ];
-      var prov = PROVERBS[(L.day || 1) % PROVERBS.length];
+        statusBoxHtml = '<div class="hh-status-box has-gio">' +
+          '<div class="hh-st-head">' +
+            '<span class="st-pulse red"></span>' +
+            '<span class="st-title">THÁNG ' + monthWord(L.month).toUpperCase() + (L.leap ? ' NHUẬN' : '') + ' NÀY: GIA ĐÌNH CÓ ' + inMonthOccs.length + ' NGÀY GIỖ</span>' +
+          '</div>' +
+          '<div class="hh-st-body">' + peopleListHtml + '</div>' +
+        '</div>';
+      } else {
+        // Trong tháng này không có giỗ: Nêu rõ tháng an yên và NÊU LUÔN TIẾT GIỖ KẾ TIẾP (Họ tên + Ngày tháng)
+        var nextInfoHtml = '';
+        if (next && next.occ) {
+          nextInfoHtml = '<div class="st-item next-item">' +
+            '<div class="st-next-tag">TIẾT GIỖ GẦN NHẤT KẾ TIẾP:</div>' +
+            '<div class="st-who"><span class="st-rel">' + esc(G.displayTitle(next.p)) + '</span> <b class="st-name">' + esc(next.p.name) + '</b></div>' +
+            '<div class="st-when">Chính giỗ: <b>' + esc(lunarPhrase(next.occ.lunarDay, next.occ.lunarMonth, next.occ.lunarLeap)) + ' ÂL</b> <span class="st-sol">(' + esc(solarLong(next.occ.jd)) + ' · còn ' + next.left + ' ngày)</span></div>' +
+          '</div>';
+        }
+
+        statusBoxHtml = '<div class="hh-status-box no-gio">' +
+          '<div class="hh-st-head">' +
+            '<span class="st-pulse cyan"></span>' +
+            '<span class="st-title">THÁNG ' + monthWord(L.month).toUpperCase() + (L.leap ? ' NHUẬN' : '') + ' NÀY: GIA ĐẠO AN YÊN · KHÔNG CÓ TIẾT GIỖ</span>' +
+          '</div>' +
+          '<div class="hh-st-body">' + nextInfoHtml + '</div>' +
+        '</div>';
+      }
 
       heroAssistant = '<div class="hh-assistant hh-card-idle">' +
         '<div class="hh-hoanhphi"><span class="hp-orn">❖</span> ẨM THỦY TƯ NGUYÊN <span class="hp-orn">❖</span></div>' +
         '<div class="hh-hp-sub">UỐNG NƯỚC NHỚ NGUỒN · GIA ĐẠO AN YÊN</div>' +
+        statusBoxHtml +
         '<div class="hh-hp-caudoi">' +
-          '<div class="hp-line">“' + prov[0] + '</div>' +
-          '<div class="hp-line">' + prov[1] + '”</div>' +
+          '<div class="hp-line">' + prov[0] + '</div>' +
+          '<div class="hp-line">' + prov[1] + '</div>' +
         '</div>' +
-        '<div class="hh-hp-status">' +
-          '<span class="hp-ic">🏮</span> <span>' + esc(monthStatus) + '</span>' +
-        '</div>' +
-        '<div class="hh-hp-wish">Kính chúc toàn thể gia quyến luôn bình an, mạnh khỏe và phúc thọ trường tồn.</div>' +
+        '<div class="hh-hp-wish">Kính chúc toàn thể gia quyến vạn sự bình an, phúc thọ trường tồn.</div>' +
       '</div>';
     }
 

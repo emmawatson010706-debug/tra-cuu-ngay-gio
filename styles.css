@@ -503,32 +503,32 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
   position: relative;
   overflow: hidden;
   margin-top: 14px;
-  padding: 14px 14px;
+  padding: 14px 12px;
   border-radius: 18px;
-  border: 1px solid rgba(233,207,138,.65);
-  box-shadow: 0 1px 0 rgba(255,255,255,.2) inset, 0 12px 24px -10px rgba(0,0,0,.6);
+  border: 1.5px solid rgba(233,207,138,.75);
+  box-shadow: 0 1px 0 rgba(255,255,255,.25) inset, 0 12px 26px -8px rgba(0,0,0,.65);
 }
 .hh-assistant::before {
   content: '';
   position: absolute;
-  inset: 5px;
+  inset: 4px;
   border-radius: 14px;
   border: 1px dashed rgba(233,207,138,.35);
   pointer-events: none;
 }
 
-/* Kiểu hoành phi sơn mài bình thường (khi ngày giỗ còn xa) */
+/* Kiểu hoành phi sơn mài bình thường */
 .hh-card-idle {
   background: linear-gradient(155deg, #a6121d 0%, #7d0c14 55%, #56070c 100%);
   text-align: center;
-  padding: 16px 14px;
+  padding: 14px 12px;
 }
 .hh-hoanhphi {
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
   letter-spacing: 1.5px;
   color: #fbefc7;
-  text-shadow: 0 1px 2px rgba(0,0,0,.6);
+  text-shadow: 0 1px 3px rgba(0,0,0,.7);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -536,55 +536,154 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
 }
 .hh-hoanhphi .hp-orn {
   color: #dfb75c;
-  font-size: 12px;
+  font-size: 13px;
 }
 .hh-hp-sub {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: .8px;
   color: #e9cf8a;
-  margin-top: 3px;
+  margin-top: 2px;
   opacity: .95;
 }
+
+/* KHỐI THÔNG BÁO XANH NỔI BẬT NÊU RÕ NGƯỜI & NGÀY THÁNG */
+.hh-status-box {
+  margin: 12px 0 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: linear-gradient(160deg, #072a4d 0%, #031c36 100%);
+  border: 1.5px solid #38bdf8;
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  text-align: left;
+}
+.hh-status-box.has-gio {
+  border-color: #38bdf8;
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+.hh-st-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.st-pulse {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex: none;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
+  animation: pulse-dot 1.4s infinite ease-in-out;
+}
+.st-pulse.red {
+  background: #f87171;
+  box-shadow: 0 0 8px #f87171;
+}
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.35); opacity: 0.6; }
+}
+.st-title {
+  font-size: 13.5px;
+  font-weight: 800;
+  letter-spacing: .3px;
+  color: #38bdf8;
+  text-shadow: 0 1px 3px rgba(0,0,0,.9), 0 0 10px rgba(56, 189, 248, 0.7);
+  line-height: 1.3;
+}
+.hh-st-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.st-item {
+  padding: 6px 8px;
+  border-radius: 10px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+.st-next-tag {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  color: #7dd3fc;
+  margin-bottom: 2px;
+}
+.st-who {
+  font-size: 15px;
+  color: #fff;
+  line-height: 1.35;
+}
+.st-rel {
+  color: #fde047;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 12.5px;
+  letter-spacing: .4px;
+}
+.st-name {
+  color: #ffffff;
+  font-size: 15.5px;
+  text-shadow: 0 1px 2px rgba(0,0,0,.6);
+}
+.st-date {
+  font-size: 13px;
+  color: #e0f2fe;
+  margin-top: 2px;
+  line-height: 1.35;
+}
+.st-date b {
+  color: #fef08a;
+  font-weight: 700;
+}
+.st-sol {
+  color: #bae6fd;
+}
+.st-days {
+  color: #fca5a5;
+  font-weight: 700;
+}
+.hh-st-msg {
+  font-size: 13px;
+  color: #e0f2fe;
+  line-height: 1.4;
+}
+
+/* CAU DOI / CA DAO: BẮT BUỘC 2 HÀNG, KHÔNG RỚT DÒNG THỨ 3 */
 .hh-hp-caudoi {
-  margin: 10px 0 8px;
-  padding: 8px 10px;
+  margin: 10px 0 6px;
+  padding: 8px 6px;
   border-radius: 12px;
-  background: rgba(0,0,0,.15);
-  border: 1px solid rgba(233,207,138,.2);
+  background: rgba(0,0,0,.22);
+  border: 1px solid rgba(233,207,138,.25);
 }
 .hp-line {
-  font-size: 13.5px;
+  font-size: 13px;
   font-style: italic;
   color: #fff9ea;
   line-height: 1.45;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
 }
-.hh-hp-status {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  font-size: 12.5px;
-  color: #ffe6aa;
-  margin-top: 4px;
-  padding: 3px 8px;
-  border-radius: 8px;
-  background: rgba(255,255,255,.08);
+@media (max-width: 380px) {
+  .hp-line {
+    font-size: 11.5px;
+  }
+  .st-title {
+    font-size: 12.5px;
+  }
 }
 .hh-hp-wish {
   font-size: 12px;
   color: #e3d2bf;
-  margin-top: 6px;
+  margin-top: 4px;
   line-height: 1.35;
 }
-.hh-hp-msg {
-  font-size: 13px;
-  color: #f7ede1;
-  margin-top: 8px;
-  line-height: 1.45;
-}
 .hh-btn-center {
-  margin-top: 10px;
+  margin-top: 8px;
 }
 
 /* Kiểu nhắc việc cúng giỗ khẩn trương (khi <= 5 ngày hoặc hôm nay) */
