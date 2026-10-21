@@ -1,14 +1,28 @@
 /* sw.js — Service worker: chạy khi không có mạng, nhận thông báo đẩy, nhắc dự phòng */
 var VERSION = 'ngaygio-v1.3.0';
+var BASE = location.pathname.replace(/\/[^\/]*$/, '/');
 var SHELL = [
-  '/', '/index.html', '/styles.css', '/app.js', '/gio-core.js', '/bai-cung.js', '/manifest.webmanifest',
-  '/icons/icon-192.png', '/icons/icon-512.png', '/icons/badge-96.png', '/icons/apple-touch-icon.png', '/icons/favicon-64.png',
-  '/fonts/be-vietnam-pro-vietnamese-400-normal.woff2', '/fonts/be-vietnam-pro-latin-400-normal.woff2',
-  '/fonts/be-vietnam-pro-vietnamese-600-normal.woff2', '/fonts/be-vietnam-pro-latin-600-normal.woff2',
-  '/fonts/be-vietnam-pro-vietnamese-700-normal.woff2', '/fonts/be-vietnam-pro-latin-700-normal.woff2'
+  BASE,
+  BASE + 'index.html',
+  BASE + 'styles.css',
+  BASE + 'app.js',
+  BASE + 'gio-core.js',
+  BASE + 'bai-cung.js',
+  BASE + 'manifest.webmanifest',
+  BASE + 'icons/icon-192.png',
+  BASE + 'icons/icon-512.png',
+  BASE + 'icons/badge-96.png',
+  BASE + 'icons/apple-touch-icon.png',
+  BASE + 'icons/favicon-64.png',
+  BASE + 'fonts/be-vietnam-pro-vietnamese-400-normal.woff2',
+  BASE + 'fonts/be-vietnam-pro-latin-400-normal.woff2',
+  BASE + 'fonts/be-vietnam-pro-vietnamese-600-normal.woff2',
+  BASE + 'fonts/be-vietnam-pro-latin-600-normal.woff2',
+  BASE + 'fonts/be-vietnam-pro-vietnamese-700-normal.woff2',
+  BASE + 'fonts/be-vietnam-pro-latin-700-normal.woff2'
 ];
 
-importScripts('/gio-core.js');
+importScripts('gio-core.js');
 
 self.addEventListener('install', function (e) {
   e.waitUntil(caches.open(VERSION).then(function (c) { return c.addAll(SHELL); }));
@@ -28,9 +42,9 @@ self.addEventListener('fetch', function (e) {
   if (req.mode === 'navigate') {
     // Trang chính: lấy bản mới khi có mạng, không có mạng thì dùng bản đã lưu
     e.respondWith(fetch(req).then(function (res) {
-      var copy = res.clone(); caches.open(VERSION).then(function (c) { c.put('/index.html', copy); });
+      var copy = res.clone(); caches.open(VERSION).then(function (c) { c.put(BASE + 'index.html', copy); });
       return res;
-    }).catch(function () { return caches.match('/index.html'); }));
+    }).catch(function () { return caches.match(BASE + 'index.html'); }));
     return;
   }
   e.respondWith(caches.match(req).then(function (hit) {
@@ -49,8 +63,8 @@ self.addEventListener('push', function (e) {
   var title = d.title || 'Nhắc ngày giỗ';
   e.waitUntil(self.registration.showNotification(title, {
     body: d.body || 'Mở ứng dụng để xem ngày giỗ sắp đến.',
-    icon: '/icons/icon-192.png',
-    badge: '/icons/badge-96.png',
+    icon: 'icons/icon-192.png',
+    badge: 'icons/badge-96.png',
     tag: d.tag || 'nhac-gio',
     renotify: true,
     data: { url: d.url || '/' }

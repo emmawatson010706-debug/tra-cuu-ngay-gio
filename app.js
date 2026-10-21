@@ -1054,7 +1054,7 @@
         var key = x.p.id + ':' + x.occ.jd + ':' + (x.left === 0 ? 'd0' : 'd5');
         if (shown[key]) return;
         shown[key] = t; changed = true;
-        swReg.showNotification('Nhắc ngày giỗ', { body: G.reminderText(x.p, x.occ, x.left), icon: '/icons/icon-192.png', badge: '/icons/badge-96.png', tag: 'gio-' + x.p.id, data: { url: '/' } });
+        swReg.showNotification('Nhắc ngày giỗ', { body: G.reminderText(x.p, x.occ, x.left), icon: 'icons/icon-192.png', badge: 'icons/badge-96.png', tag: 'gio-' + x.p.id, data: { url: '/' } });
       });
       Object.keys(shown).forEach(function (k) { if (t - shown[k] > 60) { delete shown[k]; changed = true; } });
       if (changed) setMeta('shown', shown);
@@ -1232,7 +1232,7 @@
 
   function registerSW() {
     if (!swOK()) return Promise.resolve();
-    return navigator.serviceWorker.register('/sw.js').then(function (reg) {
+    return navigator.serviceWorker.register('./sw.js').then(function (reg) {
       swReg = reg;
       reg.addEventListener('updatefound', function () {
         var nw = reg.installing;
