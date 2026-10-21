@@ -498,35 +498,43 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
 .hh-count { flex: none; text-align: center; padding: 8px 10px; border-radius: 14px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); }
 .hh-count b { display: block; font-size: 22px; line-height: 1.1; color: #fff; }
 .hh-count span { font-size: 13px; color: #dfe6f3; line-height: 1.25; display: block; }
-/* ====== Khung trợ lý gia đạo sơn mài (Phương án 2) ====== */
+/* ====== Khung trợ lý gia đạo sơn mài & Hoa văn Trống Đồng Đông Sơn ====== */
 .hh-assistant {
   position: relative;
   overflow: hidden;
   margin-top: 14px;
-  padding: 14px 12px;
-  border-radius: 18px;
+  padding: 16px 14px;
+  border-radius: 20px;
   border: 1.5px solid rgba(233,207,138,.75);
-  box-shadow: 0 1px 0 rgba(255,255,255,.25) inset, 0 12px 26px -8px rgba(0,0,0,.65);
+  box-shadow: 0 1px 0 rgba(255,255,255,.25) inset, 0 14px 28px -10px rgba(0,0,0,.65);
+}
+
+/* Khung đỏ sơn mài son thắm + Hoa văn Trống đồng Đông Sơn in chìm */
+.hh-card-idle {
+  background:
+    radial-gradient(circle at center, rgba(166, 18, 29, 0.4) 0%, rgba(100, 10, 18, 0.95) 85%),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='300' height='300'><g fill='none' stroke='%23e9cf8a' stroke-width='1.2'><circle cx='150' cy='150' r='142' stroke-width='1.5'/><circle cx='150' cy='150' r='136' stroke-dasharray='2,3'/><circle cx='150' cy='150' r='130'/><circle cx='150' cy='150' r='120'/><circle cx='150' cy='150' r='112' stroke-dasharray='4,3'/><circle cx='150' cy='150' r='105'/><circle cx='150' cy='150' r='68'/><circle cx='150' cy='150' r='60' stroke-dasharray='3,3'/><circle cx='150' cy='150' r='52'/><circle cx='150' cy='150' r='44' stroke-dasharray='2,2'/><circle cx='150' cy='150' r='38'/></g><path d='M150.0,114.0L153.1,136.4L165.6,117.6L158.7,139.1L178.1,127.6L162.6,143.9L185.1,142.0L164.0,150.0L185.1,158.0L162.6,156.1L178.1,172.4L158.7,160.9L165.6,182.4L153.1,163.6L150.0,186.0L146.9,163.6L134.4,182.4L141.3,160.9L121.9,172.4L137.4,156.1L114.9,158.0L136.0,150.0L114.9,142.0L137.4,143.9L121.9,127.6L141.3,139.1L134.4,117.6L146.9,136.4Z' fill='%23e9cf8a' opacity='0.9'/><g transform='translate(236.0, 150.0) rotate(90.0)'><path d='M0,-14 C2,-8 6,-4 14,-2 C8,-1 2,0 0,6 C-2,0 -8,-1 -14,-2 C-6,-4 -2,-8 0,-14 Z' fill='%23e9cf8a'/><circle cx='0' cy='-16' r='1.5' fill='%23e9cf8a'/></g><g transform='translate(193.0, 224.5) rotate(150.0)'><path d='M0,-14 C2,-8 6,-4 14,-2 C8,-1 2,0 0,6 C-2,0 -8,-1 -14,-2 C-6,-4 -2,-8 0,-14 Z' fill='%23e9cf8a'/><circle cx='0' cy='-16' r='1.5' fill='%23e9cf8a'/></g><g transform='translate(107.0, 224.5) rotate(210.0)'><path d='M0,-14 C2,-8 6,-4 14,-2 C8,-1 2,0 0,6 C-2,0 -8,-1 -14,-2 C-6,-4 -2,-8 0,-14 Z' fill='%23e9cf8a'/><circle cx='0' cy='-16' r='1.5' fill='%23e9cf8a'/></g><g transform='translate(64.0, 150.0) rotate(270.0)'><path d='M0,-14 C2,-8 6,-4 14,-2 C8,-1 2,0 0,6 C-2,0 -8,-1 -14,-2 C-6,-4 -2,-8 0,-14 Z' fill='%23e9cf8a'/><circle cx='0' cy='-16' r='1.5' fill='%23e9cf8a'/></g><g transform='translate(107.0, 75.5) rotate(330.0)'><path d='M0,-14 C2,-8 6,-4 14,-2 C8,-1 2,0 0,6 C-2,0 -8,-1 -14,-2 C-6,-4 -2,-8 0,-14 Z' fill='%23e9cf8a'/><circle cx='0' cy='-16' r='1.5' fill='%23e9cf8a'/></g><g transform='translate(193.0, 75.5) rotate(390.0)'><path d='M0,-14 C2,-8 6,-4 14,-2 C8,-1 2,0 0,6 C-2,0 -8,-1 -14,-2 C-6,-4 -2,-8 0,-14 Z' fill='%23e9cf8a'/><circle cx='0' cy='-16' r='1.5' fill='%23e9cf8a'/></g></svg>"),
+    linear-gradient(155deg, #a6121d 0%, #7d0c14 55%, #56070c 100%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto, 230px, auto;
+  text-align: center;
+  border: 1.5px solid rgba(233, 207, 138, 0.7);
 }
 .hh-assistant::before {
   content: '';
   position: absolute;
-  inset: 4px;
-  border-radius: 14px;
+  inset: 5px;
+  border-radius: 15px;
   border: 1px dashed rgba(233,207,138,.35);
   pointer-events: none;
 }
 
-/* Kiểu hoành phi sơn mài bình thường */
-.hh-card-idle {
-  background: linear-gradient(155deg, #a6121d 0%, #7d0c14 55%, #56070c 100%);
-  text-align: center;
-  padding: 14px 12px;
-}
+/* Hoành phi */
 .hh-hoanhphi {
-  font-size: 17px;
+  font-size: 16.5px;
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.6px;
   color: #fbefc7;
   text-shadow: 0 1px 3px rgba(0,0,0,.7);
   display: flex;
@@ -535,8 +543,8 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
   gap: 8px;
 }
 .hh-hoanhphi .hp-orn {
-  color: #dfb75c;
-  font-size: 13px;
+  color: #e9cf8a;
+  font-size: 12px;
 }
 .hh-hp-sub {
   font-size: 11px;
@@ -547,122 +555,98 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
   opacity: .95;
 }
 
-/* KHỐI THÔNG BÁO XANH NỔI BẬT NÊU RÕ NGƯỜI & NGÀY THÁNG */
-.hh-status-box {
+/* Thẻ bảng thông tin gia đạo (Màu đỏ sẫm sơn mài viền vàng, đồng nhất và trang nhã) */
+.hh-panel {
   margin: 12px 0 10px;
   padding: 10px 12px;
   border-radius: 14px;
-  background: linear-gradient(160deg, #072a4d 0%, #031c36 100%);
-  border: 1.5px solid #38bdf8;
-  box-shadow: 0 0 16px rgba(56, 189, 248, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  text-align: left;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(233, 207, 138, 0.4);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 4px 12px rgba(0, 0, 0, 0.25);
+  text-align: center;
 }
-.hh-status-box.has-gio {
-  border-color: #38bdf8;
-  box-shadow: 0 0 18px rgba(56, 189, 248, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-.hh-st-head {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.hh-panel-header {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .4px;
+  color: #ffe6aa;
+  text-shadow: 0 1px 2px rgba(0,0,0,.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-bottom: 6px;
+  border-bottom: 1px dashed rgba(233, 207, 138, 0.3);
   margin-bottom: 6px;
 }
-.st-pulse {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  flex: none;
-  background: #38bdf8;
-  box-shadow: 0 0 8px #38bdf8;
-  animation: pulse-dot 1.4s infinite ease-in-out;
+.hh-panel-sub {
+  font-size: 12.5px;
+  color: #f7ede1;
+  line-height: 1.45;
+  margin-top: 4px;
 }
-.st-pulse.red {
-  background: #f87171;
-  box-shadow: 0 0 8px #f87171;
-}
-@keyframes pulse-dot {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.35); opacity: 0.6; }
-}
-.st-title {
-  font-size: 13.5px;
-  font-weight: 800;
-  letter-spacing: .3px;
-  color: #38bdf8;
-  text-shadow: 0 1px 3px rgba(0,0,0,.9), 0 0 10px rgba(56, 189, 248, 0.7);
-  line-height: 1.3;
-}
-.hh-st-body {
+.hh-panel-row {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 3px;
+  text-align: center;
 }
-.st-item {
-  padding: 6px 8px;
-  border-radius: 10px;
-  background: rgba(255,255,255,.07);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-}
-.st-next-tag {
+.hp-next-label {
   font-size: 10.5px;
   font-weight: 700;
-  letter-spacing: .5px;
-  color: #7dd3fc;
-  margin-bottom: 2px;
+  letter-spacing: .6px;
+  color: #e9cf8a;
+  text-transform: uppercase;
 }
-.st-who {
-  font-size: 15px;
+.hp-row-name {
+  font-size: 15.5px;
   color: #fff;
-  line-height: 1.35;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.st-rel {
+.hp-rel {
   color: #fde047;
   font-weight: 700;
-  text-transform: uppercase;
   font-size: 12.5px;
+  text-transform: uppercase;
   letter-spacing: .4px;
 }
-.st-name {
-  color: #ffffff;
-  font-size: 15.5px;
-  text-shadow: 0 1px 2px rgba(0,0,0,.6);
-}
-.st-date {
-  font-size: 13px;
-  color: #e0f2fe;
-  margin-top: 2px;
-  line-height: 1.35;
-}
-.st-date b {
+.hp-name {
   color: #fef08a;
-  font-weight: 700;
+  font-size: 16px;
+  text-shadow: 0 1px 2px rgba(0,0,0,.7);
 }
-.st-sol {
-  color: #bae6fd;
-}
-.st-days {
-  color: #fca5a5;
-  font-weight: 700;
-}
-.hh-st-msg {
+.hp-row-date {
   font-size: 13px;
-  color: #e0f2fe;
-  line-height: 1.4;
+  color: #fff8e7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.hp-row-date b {
+  color: #fff;
+}
+.hp-days {
+  color: #ffd875;
+  font-weight: 600;
 }
 
 /* CAU DOI / CA DAO: BẮT BUỘC 2 HÀNG, KHÔNG RỚT DÒNG THỨ 3 */
 .hh-hp-caudoi {
   margin: 10px 0 6px;
-  padding: 8px 6px;
+  padding: 8px 10px;
   border-radius: 12px;
   background: rgba(0,0,0,.22);
   border: 1px solid rgba(233,207,138,.25);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 .hp-line {
   font-size: 13px;
   font-style: italic;
   color: #fff9ea;
-  line-height: 1.45;
+  line-height: 1.4;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -672,8 +656,11 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
   .hp-line {
     font-size: 11.5px;
   }
-  .st-title {
-    font-size: 12.5px;
+  .hh-panel-header {
+    font-size: 12px;
+  }
+  .hp-row-name {
+    font-size: 14.5px;
   }
 }
 .hh-hp-wish {
@@ -686,12 +673,21 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
   margin-top: 8px;
 }
 
-/* Kiểu nhắc việc cúng giỗ khẩn trương (khi <= 5 ngày hoặc hôm nay) */
+/* Khung nhắc việc cúng giỗ khẩn trương (khi <= 5 ngày hoặc hôm nay) */
 .hh-card-urgent {
-  background: linear-gradient(155deg, #c01825 0%, #8f0e17 55%, #63080e 100%);
+  background:
+    radial-gradient(circle at center, rgba(192, 24, 37, 0.4) 0%, rgba(110, 9, 17, 0.95) 85%),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='300' height='300'><g fill='none' stroke='%23e9cf8a' stroke-width='1.2'><circle cx='150' cy='150' r='142' stroke-width='1.5'/><circle cx='150' cy='150' r='136' stroke-dasharray='2,3'/><circle cx='150' cy='150' r='130'/><circle cx='150' cy='150' r='120'/><circle cx='150' cy='150' r='112' stroke-dasharray='4,3'/><circle cx='150' cy='150' r='105'/><circle cx='150' cy='150' r='68'/><circle cx='150' cy='150' r='60' stroke-dasharray='3,3'/><circle cx='150' cy='150' r='52'/><circle cx='150' cy='150' r='44' stroke-dasharray='2,2'/><circle cx='150' cy='150' r='38'/></g><path d='M150.0,114.0L153.1,136.4L165.6,117.6L158.7,139.1L178.1,127.6L162.6,143.9L185.1,142.0L164.0,150.0L185.1,158.0L162.6,156.1L178.1,172.4L158.7,160.9L165.6,182.4L153.1,163.6L150.0,186.0L146.9,163.6L134.4,182.4L141.3,160.9L121.9,172.4L137.4,156.1L114.9,158.0L136.0,150.0L114.9,142.0L137.4,143.9L121.9,127.6L141.3,139.1L134.4,117.6L146.9,136.4Z' fill='%23e9cf8a' opacity='0.9'/><g transform='translate(236.0, 150.0) rotate(90.0)'><path d='M0,-14 C2,-8 6,-4 14,-2 C8,-1 2,0 0,6 C-2,0 -8,-1 -14,-2 C-6,-4 -2,-8 0,-14 Z' fill='%23e9cf8a'/><circle cx='0' cy='-16' r='1.5' fill='%23e9cf8a'/></g><g transform='translate(193.0, 224.5) rotate(150.0)'><path d='M0,-14 C2,-8 6,-4 14,-2 C8,-1 2,0 0,6 C-2,0 -8,-1 -14,-2 C-6,-4 -2,-8 0,-14 Z' fill='%23e9cf8a'/><circle cx='0' cy='-16' r='1.5' fill='%23e9cf8a'/></g><g transform='translate(107.0, 224.5) rotate(210.0)'><path d='M0,-14 C2,-8 6,-4 14,-2 C8,-1 2,0 0,6 C-2,0 -8,-1 -14,-2 C-6,-4 -2,-8 0,-14 Z' fill='%23e9cf8a'/><circle cx='0' cy='-16' r='1.5' fill='%23e9cf8a'/></g><g transform='translate(64.0, 150.0) rotate(270.0)'><path d='M0,-14 C2,-8 6,-4 14,-2 C8,-1 2,0 0,6 C-2,0 -8,-1 -14,-2 C-6,-4 -2,-8 0,-14 Z' fill='%23e9cf8a'/><circle cx='0' cy='-16' r='1.5' fill='%23e9cf8a'/></g><g transform='translate(107.0, 75.5) rotate(330.0)'><path d='M0,-14 C2,-8 6,-4 14,-2 C8,-1 2,0 0,6 C-2,0 -8,-1 -14,-2 C-6,-4 -2,-8 0,-14 Z' fill='%23e9cf8a'/><circle cx='0' cy='-16' r='1.5' fill='%23e9cf8a'/></g><g transform='translate(193.0, 75.5) rotate(390.0)'><path d='M0,-14 C2,-8 6,-4 14,-2 C8,-1 2,0 0,6 C-2,0 -8,-1 -14,-2 C-6,-4 -2,-8 0,-14 Z' fill='%23e9cf8a'/><circle cx='0' cy='-16' r='1.5' fill='%23e9cf8a'/></g></svg>"),
+    linear-gradient(155deg, #c01825 0%, #8f0e17 55%, #63080e 100%);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto, 230px, auto;
 }
 .hh-card-urgent.is-today {
-  background: linear-gradient(155deg, #d41e2c 0%, #9e101a 55%, #6e0911 100%);
+  background:
+    radial-gradient(circle at center, rgba(212, 30, 44, 0.4) 0%, rgba(120, 10, 18, 0.95) 85%),
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300' width='300' height='300'><g fill='none' stroke='%23e9cf8a' stroke-width='1.2'><circle cx='150' cy='150' r='142' stroke-width='1.5'/><circle cx='150' cy='150' r='136' stroke-dasharray='2,3'/><circle cx='150' cy='150' r='130'/><circle cx='150' cy='150' r='120'/><circle cx='150' cy='150' r='112' stroke-dasharray='4,3'/><circle cx='150' cy='150' r='105'/><circle cx='150' cy='150' r='68'/><circle cx='150' cy='150' r='60' stroke-dasharray='3,3'/><circle cx='150' cy='150' r='52'/><circle cx='150' cy='150' r='44' stroke-dasharray='2,2'/><circle cx='150' cy='150' r='38'/></g><path d='M150.0,114.0L153.1,136.4L165.6,117.6L158.7,139.1L178.1,127.6L162.6,143.9L185.1,142.0L164.0,150.0L185.1,158.0L162.6,156.1L178.1,172.4L158.7,160.9L165.6,182.4L153.1,163.6L150.0,186.0L146.9,163.6L134.4,182.4L141.3,160.9L121.9,172.4L137.4,156.1L114.9,158.0L136.0,150.0L114.9,142.0L137.4,143.9L121.9,127.6L141.3,139.1L134.4,117.6L146.9,136.4Z' fill='%23e9cf8a' opacity='0.9'/><g transform='translate(236.0, 150.0) rotate(90.0)'><path d='M0,-14 C2,-8 6,-4 14,-2 C8,-1 2,0 0,6 C-2,0 -8,-1 -14,-2 C-6,-4 -2,-8 0,-14 Z' fill='%23e9cf8a'/><circle cx='0' cy='-16' r='1.5' fill='%23e9cf8a'/></g><g transform='translate(193.0, 224.5) rotate(150.0)'><path d='M0,-14 C2,-8 6,-4 14,-2 C8,-1 2,0 0,6 C-2,0 -8,-1 -14,-2 C-6,-4 -2,-8 0,-14 Z' fill='%23e9cf8a'/><circle cx='0' cy='-16' r='1.5' fill='%23e9cf8a'/></g><g transform='translate(107.0, 224.5) rotate(210.0)'><path d='M0,-14 C2,-8 6,-4 14,-2 C8,-1 2,0 0,6 C-2,0 -8,-1 -14,-2 C-6,-4 -2,-8 0,-14 Z' fill='%23e9cf8a'/><circle cx='0' cy='-16' r='1.5' fill='%23e9cf8a'/></g><g transform='translate(64.0, 150.0) rotate(270.0)'><path d='M0,-14 C2,-8 6,-4 14,-2 C8,-1 2,0 0,6 C-2,0 -8,-1 -14,-2 C-6,-4 -2,-8 0,-14 Z' fill='%23e9cf8a'/><circle cx='0' cy='-16' r='1.5' fill='%23e9cf8a'/></g><g transform='translate(107.0, 75.5) rotate(330.0)'><path d='M0,-14 C2,-8 6,-4 14,-2 C8,-1 2,0 0,6 C-2,0 -8,-1 -14,-2 C-6,-4 -2,-8 0,-14 Z' fill='%23e9cf8a'/><circle cx='0' cy='-16' r='1.5' fill='%23e9cf8a'/></g><g transform='translate(193.0, 75.5) rotate(390.0)'><path d='M0,-14 C2,-8 6,-4 14,-2 C8,-1 2,0 0,6 C-2,0 -8,-1 -14,-2 C-6,-4 -2,-8 0,-14 Z' fill='%23e9cf8a'/><circle cx='0' cy='-16' r='1.5' fill='%23e9cf8a'/></g></svg>"),
+    linear-gradient(155deg, #d41e2c 0%, #9e101a 55%, #6e0911 100%);
   border-color: #ffd875;
   box-shadow: 0 0 0 2px rgba(255,216,117,.3), 0 14px 28px -10px rgba(0,0,0,.7);
 }
@@ -720,6 +716,9 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
   text-align: center;
   color: #fff;
   margin: 6px 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .hh-urgent-who span {
   color: #f7dc99;
@@ -735,9 +734,9 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
   text-align: center;
   font-size: 13px;
   color: #fedfa2;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .hh-urgent-tip {
   font-size: 13px;
@@ -746,7 +745,7 @@ details.prayer .p-next { display: block; font-size: 13px; font-weight: 600; colo
   margin: 8px 0 0;
   padding: 8px 10px;
   border-radius: 10px;
-  background: rgba(0,0,0,.15);
+  background: rgba(0,0,0,.2);
   border: 1px solid rgba(255,255,255,.15);
   text-align: center;
 }
