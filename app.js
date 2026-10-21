@@ -1,3 +1,23 @@
+
+  /* Đồng hồ vuông chạy chính xác theo múi giờ Việt Nam (UTC+7) */
+  function updateVNClock() {
+    var d = new Date();
+    var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+    var vn = new Date(utc + (7 * 3600000));
+    var h = vn.getHours(), m = vn.getMinutes(), s = vn.getSeconds();
+    var elSec = document.getElementById('clock-sec');
+    var elMin = document.getElementById('clock-min');
+    var elHour = document.getElementById('clock-hour');
+    var elDigi = document.getElementById('clock-digital');
+    if (elSec) elSec.setAttribute('transform', 'rotate(' + (s * 6) + ' 50 50)');
+    if (elMin) elMin.setAttribute('transform', 'rotate(' + (m * 6 + s * 0.1) + ' 50 50)');
+    if (elHour) elHour.setAttribute('transform', 'rotate(' + ((h % 12) * 30 + m * 0.5) + ' 50 50)');
+    if (elDigi) {
+      var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+      elDigi.textContent = pad(h) + ':' + pad(m) + ':' + pad(s);
+    }
+  }
+  setInterval(updateVNClock, 1000);
 /* app.js — Giao diện "Tra cứu ngày giỗ" */
 (function () {
   'use strict';
@@ -233,9 +253,11 @@
     if (!rows.length) {
       // Khi chưa có người nào
       infoHtml = '<div class="hh-info-block">' +
-        '<div class="hh-status-headline">CHƯA CÓ NGÀY GIỖ NÀO ĐƯỢC LƯU</div>' +
-        '<p class="hh-status-desc">Ứng dụng tự động tính ngày dương lịch và nhắc nhở con cháu chu toàn ngày giỗ gia tiên.</p>' +
-        '<div style="margin-top:12px">' +
+        '<div class="hh-status-headline-center">' +
+          '<div class="hh-st-month">CHƯA CÓ NGÀY GIỖ NÀO ĐƯỢC LƯU</div>' +
+          '<div class="hh-st-desc">Ứng dụng tự động tính ngày dương lịch và nhắc nhở con cháu chu toàn ngày giỗ gia tiên.</div>' +
+        '</div>' +
+        '<div style="margin-top:12px;text-align:center">' +
           '<button class="btn btn-red btn-sm" type="button" data-go="nhap">' +
             '<svg width="18" height="18"><use href="#i-plus"/></svg> Nhập ngày giỗ đầu tiên</button>' +
         '</div>' +
@@ -250,11 +272,11 @@
 
       infoHtml = '<div class="hh-info-block is-urgent' + (isToday ? ' is-today' : '') + '">' +
         '<div class="hh-urgent-bar">' +
-          '<span class="hh-badge-urgent">' + (isToday ? '⚡ HÔM NAY CHÍNH GIỖ' : '🔔 NHẮC LỄ · CÒN ' + next.left + ' NGÀY') + '</span>' +
+          '<span class="hh-badge-urgent">' + (isToday ? '⚡ HÔM NAY CHÍNH GIỖ ⚡' : '🔔 NHẮC LỄ · CÒN ' + next.left + ' NGÀY') + '</span>' +
         '</div>' +
-        '<div class="hh-target-name">' + whoList + '</div>' +
-        '<div class="hh-target-date">' +
-          'Chính giỗ: <b>' + esc(lunarPhrase(o.lunarDay, o.lunarMonth, o.lunarLeap)) + ' âm lịch</b> (' + esc(G.canChiYear(o.lunarYear)) + ')' +
+        '<div class="hh-target-item is-urgent-item">' +
+          '<div class="hh-target-name">' + whoList + '</div>' +
+          '<div class="hh-target-date">Chính giỗ: <b>' + esc(lunarPhrase(o.lunarDay, o.lunarMonth, o.lunarLeap)) + ' âm lịch</b></div>' +
           '<div class="hh-target-solar">Dương lịch: ' + esc(solarLong(o.jd)) + '</div>' +
         '</div>' +
         '<div class="hh-urgent-btns">' +
@@ -266,7 +288,7 @@
         '</div>' +
       '</div>';
     } else {
-      // Khi ngày giỗ còn xa (> 5 ngày): Bố cục bạc tối giản, thoáng đãng, chữ to rõ, không che lấp
+      // Khi ngày giỗ còn xa (> 5 ngày): Khung vàng đồng sang trọng, cân đối ở giữa 2 bên
       var inMonthOccs = [];
       state.people.forEach(function (p) {
         var occ = G.resolveOccurrence(p, L.year);
@@ -274,14 +296,18 @@
           inMonthOccs.push({ p: p, occ: occ });
         }
       });
-      inMonthOccs.sort(function(a, b) { return a.occ.jd - b.occ.jd; });
+      inMonthOccs.sort(function (a, b) { return a.occ.jd - b.occ.jd; });
 
-      var monthHeader = '';
+      var monthHeaderHtml = '';
       var detailsHtml = '';
 
       if (inMonthOccs.length > 0) {
-        monthHeader = '<div class="hh-status-headline has-gio">THÁNG ' + monthWord(L.month).toUpperCase() + (L.leap ? ' NHUẬN' : '') + ' NÀY: GIA ĐÌNH CÓ ' + inMonthOccs.length + ' NGÀY GIỖ</div>';
-        detailsHtml = inMonthOccs.map(function(x) {
+        monthHeaderHtml = '<div class="hh-status-headline-center has-gio">' +
+          '<div class="hh-st-month">THÁNG ' + monthWord(L.month).toUpperCase() + (L.leap ? ' NHUẬN' : '') + ' NÀY</div>' +
+          '<div class="hh-st-desc">GIA ĐÌNH CÓ ' + inMonthOccs.length + ' NGÀY GIỖ TIÊN TỔ</div>' +
+        '</div>';
+
+        detailsHtml = inMonthOccs.map(function (x) {
           return '<div class="hh-target-item">' +
             '<div class="hh-target-name"><span class="hh-who-rel">' + esc(G.displayTitle(x.p)) + '</span> <b>' + esc(x.p.name) + '</b></div>' +
             '<div class="hh-target-date">Chính giỗ: <b>' + esc(lunarPhrase(x.occ.lunarDay, x.occ.lunarMonth, x.occ.lunarLeap)) + ' âm lịch</b></div>' +
@@ -289,31 +315,61 @@
           '</div>';
         }).join('');
       } else {
-        monthHeader = '<div class="hh-status-headline">THÁNG ' + monthWord(L.month).toUpperCase() + (L.leap ? ' NHUẬN' : '') + ' NÀY: GIA ĐẠO AN YÊN · KHÔNG CÓ TIẾT GIỖ</div>';
+        // Dịch chuyển vào giữa 2 bên: Hàng 1 "THÁNG 9 NÀY", Hàng 2 "GIA ĐẠO AN YÊN · KHÔNG CÓ TIẾT GIỖ"
+        monthHeaderHtml = '<div class="hh-status-headline-center">' +
+          '<div class="hh-st-month">THÁNG ' + monthWord(L.month).toUpperCase() + (L.leap ? ' NHUẬN' : '') + ' NÀY</div>' +
+          '<div class="hh-st-desc">GIA ĐẠO AN YÊN · KHÔNG CÓ TIẾT GIỖ</div>' +
+        '</div>';
+
         if (next && next.occ) {
+          // Khung nhỏ bên trong: Tất cả nội dung chuyển dịch ra chính giữa, cân đối 2 bên
           detailsHtml = '<div class="hh-target-item">' +
             '<div class="hh-target-sublabel">TIẾT GIỖ GẦN NHẤT KẾ TIẾP</div>' +
             '<div class="hh-target-name"><span class="hh-who-rel">' + esc(G.displayTitle(next.p)) + '</span> <b>' + esc(next.p.name) + '</b></div>' +
             '<div class="hh-target-date">Chính giỗ: <b>' + esc(lunarPhrase(next.occ.lunarDay, next.occ.lunarMonth, next.occ.lunarLeap)) + ' âm lịch</b></div>' +
-            '<div class="hh-target-solar">Dương lịch: ' + esc(solarLong(next.occ.jd)) + ' <span class="hh-days-pill">Còn ' + next.left + ' ngày</span></div>' +
+            '<div class="hh-target-solar">Dương lịch: ' + esc(solarLong(next.occ.jd)) + '</div>' +
+            '<div class="hh-target-pill-wrap"><span class="hh-days-pill">Còn ' + next.left + ' ngày</span></div>' +
           '</div>';
         }
       }
 
       infoHtml = '<div class="hh-info-block">' +
-        monthHeader +
+        monthHeaderHtml +
         detailsHtml +
       '</div>';
     }
 
+    // Đồng hồ vuông chạy chính xác theo giờ Việt Nam thay thế chữ 12, nằm cân đối ở giữa 2 bên
+    var clockSvgHtml = '<div class="vn-clock-card" title="Múi giờ Việt Nam (UTC+7)">' +
+      '<svg class="vn-clock-svg" width="76" height="76" viewBox="0 0 100 100">' +
+        '<rect x="3" y="3" width="94" height="94" rx="20" class="clock-face"/>' +
+        '<rect x="7" y="7" width="86" height="86" rx="16" class="clock-inner"/>' +
+        '<line x1="50" y1="9" x2="50" y2="15" class="clock-tick tick-main"/>' +
+        '<line x1="91" y1="50" x2="85" y2="50" class="clock-tick tick-main"/>' +
+        '<line x1="50" y1="91" x2="50" y2="85" class="clock-tick tick-main"/>' +
+        '<line x1="9" y1="50" x2="15" y2="50" class="clock-tick tick-main"/>' +
+        '<line x1="50" y1="50" x2="50" y2="24" class="hand hand-hour" id="clock-hour"/>' +
+        '<line x1="50" y1="50" x2="50" y2="16" class="hand hand-min" id="clock-min"/>' +
+        '<line x1="50" y1="58" x2="50" y2="12" class="hand hand-sec" id="clock-sec"/>' +
+        '<circle cx="50" cy="50" r="3.5" class="clock-dot"/>' +
+      '</svg>' +
+      '<div class="vn-clock-digital" id="clock-digital">00:00:00</div>' +
+    '</div>';
+
     $('home-hero').innerHTML =
-      '<div class="hh-top">' +
-        '<div class="hh-date"><div class="hh-daynum">' + L.day + '</div>' +
-          '<div class="hh-daytx"><div class="hh-k">Hôm nay · âm lịch</div><div class="hh-lunar">' + esc(lunarPhrase(L.day, L.month, L.leap)) + '</div>' +
-          '<div class="hh-year">Năm ' + esc(G.canChiYear(L.year)) + '</div>' +
-          '<div class="hh-sol">' + esc(solarLong(t)) + '</div></div></div>' +
-        '<div class="hh-count"><b>' + rows.length + '</b><span>người<br>đã khuất</span></div>' +
+      '<div class="hh-top-center">' +
+        '<div class="hh-center-group">' +
+          clockSvgHtml +
+          '<div class="hh-daytx">' +
+            '<div class="hh-k">HÔM NAY · ÂM LỊCH</div>' +
+            '<div class="hh-lunar">' + esc(lunarPhrase(L.day, L.month, L.leap)) + '</div>' +
+            '<div class="hh-year">Năm ' + esc(G.canChiYear(L.year)) + '</div>' +
+            '<div class="hh-sol">' + esc(solarLong(t)) + '</div>' +
+          '</div>' +
+        '</div>' +
       '</div>' + infoHtml;
+
+    updateVNClock();
 
     if (!rows.length) {
       $('home-list').innerHTML = '<div class="home-empty"><div class="em-ic"><svg width="30" height="30"><use href="#i-incense"/></svg></div>' +
